@@ -1,0 +1,58 @@
+{
+  "total_records": 80,
+  "agent_type_rankings": [
+    {
+      "total_count": 28,
+      "multimodal_count": 28,
+      "percentage": 100.0,
+      "agent_type": "Autonomous Agent"
+    },
+    {
+      "total_count": 26,
+      "multimodal_count": 26,
+      "percentage": 100.0,
+      "agent_type": "Reactive Agent"
+    },
+    {
+      "total_count": 26,
+      "multimodal_count": 0,
+      "percentage": 0.0,
+      "agent_type": "Collaborative Agent"
+    }
+  ],
+  "model_architecture_rankings": [
+    {
+      "total_count": 28,
+      "multimodal_count": 28,
+      "percentage": 100.0,
+      "model_architecture": "Transformer"
+    },
+    {
+      "total_count": 26,
+      "multimodal_count": 26,
+      "percentage": 100.0,
+      "model_architecture": "RNN"
+    },
+    {
+      "total_count": 26,
+      "multimodal_count": 0,
+      "percentage": 0.0,
+      "model_architecture": "CNN"
+    }
+  ],
+  "task_category_rankings": [
+    {
+      "task_category": "Image Recognition",
+      "median_bias": 68.0
+    },
+    {
+      "task_category": "Multimodal",
+      "median_bias": 66.0
+    },
+    {
+      "task_category": "Text Analysis",
+      "median_bias": 66.0
+    }
+  ],
+  "timestamp": "2025-09-24T20:46:58.247790"
+}
