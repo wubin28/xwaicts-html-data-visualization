@@ -1,0 +1,60 @@
+{
+  "total_records": 80,
+  "agent_type_rankings": [
+    {
+      "type": "对话型",
+      "percentage": 57.14285714285714,
+      "multimodal": 8,
+      "total": 14
+    },
+    {
+      "type": "学习型",
+      "percentage": 53.84615384615385,
+      "multimodal": 7,
+      "total": 13
+    },
+    {
+      "type": "推理型",
+      "percentage": 50.0,
+      "multimodal": 7,
+      "total": 14
+    }
+  ],
+  "model_architecture_rankings": [
+    {
+      "architecture": "Transformer",
+      "percentage": 80.0,
+      "multimodal": 40,
+      "total": 50
+    },
+    {
+      "architecture": "混合架构",
+      "percentage": 0.0,
+      "multimodal": 0,
+      "total": 12
+    },
+    {
+      "architecture": "分层架构",
+      "percentage": 0.0,
+      "multimodal": 0,
+      "total": 10
+    }
+  ],
+  "bias_detection_rankings": [
+    {
+      "task": "内容生成",
+      "median": 0.84,
+      "samples": 14
+    },
+    {
+      "task": "创意写作",
+      "median": 0.77,
+      "samples": 14
+    },
+    {
+      "task": "代码生成",
+      "median": 0.72,
+      "samples": 13
+    }
+  ]
+}
