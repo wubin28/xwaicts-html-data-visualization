@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic AI Performance Dashboard 2025</title>
+    <style>
+        /* Mobile-first CSS with light color scheme */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #e0e7ff 0%, #f0f9ff 100%);
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .header h1 {
+            color: #1e293b;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+
+        /* Summary Cards */
+        .summary-section {
+            padding: 2rem 0;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .summary-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        .summary-card h3 {
+            color: #1e293b;
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .metric:last-child {
+            border-bottom: none;
+        }
+
+        .metric-label {
+            font-size: 0.875rem;
+            color: #64748b;
+        }
+
+        .metric-value {
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        /* Visualization Section */
+        .viz-section {
+            padding: 2rem 0;
+        }
+
+        .viz-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .viz-card {
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+
+        .viz-header {
+            background: #f8fafc;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .viz-header h3 {
+            color: #1e293b;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .viz-header p {
+            color: #64748b;
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+        }
+
+        .viz-content {
+            padding: 1.5rem;
+        }
+
+        /* Bar Chart Styles */
+        .bar-chart {
+            margin-top: 1rem;
+        }
+
+        .bar-item {
+            margin-bottom: 1rem;
+        }
+
+        .bar-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .bar-name {
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .bar-value {
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .bar-container {
+            background: #f1f5f9;
+            height: 1.5rem;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 100%);
+            border-radius: 0.75rem;
+            transition: width 0.3s ease;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 0.375rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-top: 0.25rem;
+        }
+
+        /* Table Styles */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.875rem;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .data-table th {
+            background: #f8fafc;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .data-table td {
+            color: #64748b;
+        }
+
+        .rank-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+
+        .rank-1 {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .rank-2 {
+            background: #e0e7ff;
+            color: #4f46e5;
+        }
+
+        .rank-3 {
+            background: #d1fae5;
+            color: #059669;
+        }
+
+        /* Footer */
+        .footer {
+            background: #f8fafc;
+            padding: 2rem 1rem;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 2rem;
+        }
+
+        .footer p {
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+
+        /* Desktop Responsive */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 1200px;
+                padding: 0 2rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .summary-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .viz-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .viz-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>Agentic AI Performance Dashboard 2025</h1>
+            <p>Comprehensive analysis of AI agent performance metrics and capabilities</p>
+        </header>
+
+        <!-- Summary Section -->
+        <section class="summary-section">
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <h3>Dataset Overview</h3>
+                    <div class="metric">
+                        <span class="metric-label">Total Records</span>
+                        <span class="metric-value">80</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Data Columns</span>
+                        <span class="metric-value">5</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Missing Values</span>
+                        <span class="metric-value">0</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Processing Date</span>
+                        <span class="metric-value">2025-09-24</span>
+                    </div>
+                </div>
+
+                <div class="summary-card">
+                    <h3>Agent Types</h3>
+                    <div class="metric">
+                        <span class="metric-label">Autonomous Agent</span>
+                        <span class="metric-value">20</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Reactive Agent</span>
+                        <span class="metric-value">20</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Collaborative Agent</span>
+                        <span class="metric-value">20</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Unique Types</span>
+                        <span class="metric-value">4</span>
+                    </div>
+                </div>
+
+                <div class="summary-card">
+                    <h3>Model Architectures</h3>
+                    <div class="metric">
+                        <span class="metric-label">Transformer</span>
+                        <span class="metric-value">20</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">RNN</span>
+                        <span class="metric-value">20</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">CNN</span>
+                        <span class="metric-value">20</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Unique Architectures</span>
+                        <span class="metric-value">4</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Visualization Section -->
+        <section class="viz-section">
+            <div class="viz-grid">
+                <!-- Visualization 1: Agent Type Multimodal Ranking -->
+                <div class="viz-card">
+                    <div class="viz-header">
+                        <h3>Agent Type Multimodal Support</h3>
+                        <p>Top 3 agent types by multimodal capability percentage</p>
+                    </div>
+                    <div class="viz-content">
+                        <div class="bar-chart">
+                            <div class="bar-item">
+                                <div class="bar-label">
+                                    <span class="bar-name"><span class="rank-badge rank-1">#1</span>Autonomous Agent</span>
+                                    <span class="bar-value">100%</span>
+                                </div>
+                                <div class="bar-container">
+                                    <div class="bar-fill" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            <div class="bar-item">
+                                <div class="bar-label">
+                                    <span class="bar-name"><span class="rank-badge rank-1">#1</span>Reactive Agent</span>
+                                    <span class="bar-value">100%</span>
+                                </div>
+                                <div class="bar-container">
+                                    <div class="bar-fill" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            <div class="bar-item">
+                                <div class="bar-label">
+                                    <span class="bar-name"><span class="rank-badge rank-3">#3</span>Collaborative Agent</span>
+                                    <span class="bar-value">0%</span>
+                                </div>
+                                <div class="bar-container">
+                                    <div class="bar-fill" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visualization 2: Model Architecture Multimodal Ranking -->
+                <div class="viz-card">
+                    <div class="viz-header">
+                        <h3>Model Architecture Multimodal Support</h3>
+                        <p>Top 3 architectures by multimodal capability percentage</p>
+                    </div>
+                    <div class="viz-content">
+                        <div class="bar-chart">
+                            <div class="bar-item">
+                                <div class="bar-label">
+                                    <span class="bar-name"><span class="rank-badge rank-1">#1</span>Transformer</span>
+                                    <span class="bar-value">100%</span>
+                                </div>
+                                <div class="bar-container">
+                                    <div class="bar-fill" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            <div class="bar-item">
+                                <div class="bar-label">
+                                    <span class="bar-name"><span class="rank-badge rank-1">#1</span>RNN</span>
+                                    <span class="bar-value">100%</span>
+                                </div>
+                                <div class="bar-container">
+                                    <div class="bar-fill" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            <div class="bar-item">
+                                <div class="bar-label">
+                                    <span class="bar-name"><span class="rank-badge rank-3">#3</span>CNN</span>
+                                    <span class="bar-value">0%</span>
+                                </div>
+                                <div class="bar-container">
+                                    <div class="bar-fill" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visualization 3: Task Category Bias Detection Rankings -->
+                <div class="viz-card">
+                    <div class="viz-header">
+                        <h3>Task Category Bias Detection Scores</h3>
+                        <p>Top 3 task categories by median bias detection score</p>
+                    </div>
+                    <div class="viz-content">
+                        <div class="bar-chart">
+                            <div class="bar-item">
+                                <div class="bar-label">
+                                    <span class="bar-name"><span class="rank-badge rank-1">#1</span>Image Recognition</span>
+                                    <span class="bar-value">70.0</span>
+                                </div>
+                                <div class="bar-container">
+                                    <div class="bar-fill" style="width: 70%"></div>
+                                </div>
+                            </div>
+                            <div class="bar-item">
+                                <div class="bar-label">
+                                    <span class="bar-name"><span class="rank-badge rank-1">#1</span>Multimodal</span>
+                                    <span class="bar-value">70.0</span>
+                                </div>
+                                <div class="bar-container">
+                                    <div class="bar-fill" style="width: 70%"></div>
+                                </div>
+                            </div>
+                            <div class="bar-item">
+                                <div class="bar-label">
+                                    <span class="bar-name"><span class="rank-badge rank-3">#3</span>Text Analysis</span>
+                                    <span class="bar-value">69.0</span>
+                                </div>
+                                <div class="bar-container">
+                                    <div class="bar-fill" style="width: 69%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Statistics -->
+                <div class="viz-card">
+                    <div class="viz-header">
+                        <h3>Bias Detection Statistics</h3>
+                        <p>Detailed metrics for top task categories</p>
+                    </div>
+                    <div class="viz-content">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Task Category</th>
+                                    <th>Median</th>
+                                    <th>Mean</th>
+                                    <th>Std Dev</th>
+                                    <th>Min</th>
+                                    <th>Max</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Image Recognition</strong></td>
+                                    <td>70.0</td>
+                                    <td>71.5</td>
+                                    <td>14.17</td>
+                                    <td>51.0</td>
+                                    <td>99.0</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Multimodal</strong></td>
+                                    <td>70.0</td>
+                                    <td>71.0</td>
+                                    <td>13.46</td>
+                                    <td>51.0</td>
+                                    <td>97.0</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Text Analysis</strong></td>
+                                    <td>69.0</td>
+                                    <td>70.5</td>
+                                    <td>14.17</td>
+                                    <td>50.0</td>
+                                    <td>98.0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Key Insights -->
+                <div class="viz-card">
+                    <div class="viz-header">
+                        <h3>Key Insights</h3>
+                        <p>Summary of findings from the analysis</p>
+                    </div>
+                    <div class="viz-content">
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-value">100%</div>
+                                <div class="stat-label">Autonomous Agents with Multimodal Support</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">100%</div>
+                                <div class="stat-label">Transformers with Multimodal Support</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">70.0</div>
+                                <div class="stat-label">Highest Bias Detection Score</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">80</div>
+                                <div class="stat-label">Total Records Analyzed</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Quality -->
+                <div class="viz-card">
+                    <div class="viz-header">
+                        <h3>Data Quality Assessment</h3>
+                        <p>Completeness and uniqueness metrics</p>
+                    </div>
+                    <div class="viz-content">
+                        <div class="bar-chart">
+                            <div class="bar-item">
+                                <div class="bar-label">
+                                    <span class="bar-name">Data Completeness</span>
+                                    <span class="bar-value">100%</span>
+                                </div>
+                                <div class="bar-container">
+                                    <div class="bar-fill" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            <div class="bar-item">
+                                <div class="bar-label">
+                                    <span class="bar-name">Agent Type Diversity</span>
+                                    <span class="bar-value">4 types</span>
+                                </div>
+                                <div class="bar-container">
+                                    <div class="bar-fill" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="bar-item">
+                                <div class="bar-label">
+                                    <span class="bar-name">Model Architecture Diversity</span>
+                                    <span class="bar-value">4 types</span>
+                                </div>
+                                <div class="bar-container">
+                                    <div class="bar-fill" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="bar-item">
+                                <div class="bar-label">
+                                    <span class="bar-name">Task Category Diversity</span>
+                                    <span class="bar-value">4 types</span>
+                                </div>
+                                <div class="bar-container">
+                                    <div class="bar-fill" style="width: 80%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Generated on 2025-09-24 | Agentic AI Performance Dataset 2025 | 80 records analyzed</p>
+            <p>Mobile-responsive dashboard | No external dependencies</p>
+        </footer>
+    </div>
+</body>
+</html>

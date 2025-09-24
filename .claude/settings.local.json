@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c:*)",
+      "Bash(python3 -m pip:*)",
+      "Bash(sudo apt:*)",
+      "Bash(sudo apt install:*)",
+      "Bash(cat:*)",
+      "Bash(python3:*)",
+      "Bash(pip3 install:*)",
+      "Bash(pip install:*)",
+      "Bash(apt list:*)",
+      "Bash(grep:*)",
+      "Read(//usr/bin/**)",
+      "Bash(python3.12:*)",
+      "Bash(curl:*)",
+      "Bash(pkill:*)",
+      "Bash(time python3.12:*)",
+      "Bash(/dev/null)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
