@@ -1,0 +1,45 @@
+{
+  "agent_multimodal_top3": [
+    [
+      "Research Assistant",
+      60.0
+    ],
+    [
+      "Document Processor",
+      33.33333333333333
+    ],
+    [
+      "Sales Assistant",
+      28.57142857142857
+    ]
+  ],
+  "model_multimodal_top3": [
+    [
+      "GPT-4o",
+      37.5
+    ],
+    [
+      "CodeT5+",
+      33.33333333333333
+    ],
+    [
+      "Transformer-XL",
+      20.0
+    ]
+  ],
+  "task_bias_top3": [
+    [
+      "Communication",
+      0.8214
+    ],
+    [
+      "Research & Summarization",
+      0.78535
+    ],
+    [
+      "Decision Making",
+      0.7816
+    ]
+  ],
+  "total_rows": 80
+}
