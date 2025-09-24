@@ -1,0 +1,19 @@
+{
+  "total_records": 80,
+  "multimodal_records": 45,
+  "agent_types": {
+    "labels": ["对话型智能体", "视觉理解智能体", "多模态交互智能体"],
+    "data": [35.6, 28.9, 24.4],
+    "title": "多模态智能体类型占比前三"
+  },
+  "model_architectures": {
+    "labels": ["Transformer", "CNN+LSTM", "Vision Transformer"],
+    "data": [42.2, 31.1, 26.7],
+    "title": "多模态大模型架构占比前三"
+  },
+  "task_bias": {
+    "labels": ["图像识别任务", "文本理解任务", "语音交互任务"],
+    "data": [0.85, 0.78, 0.72],
+    "title": "任务公正性中位数前三"
+  }
+}
