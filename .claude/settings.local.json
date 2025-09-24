@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3:*)",
+      "Bash(pip install:*)",
+      "Bash(apt:*)",
+      "Bash(apt install:*)",
+      "Bash(sudo:*)",
+      "Bash(sudo apt install:*)",
+      "Read(//usr/lib/python3.12/**)",
+      "Read(//usr/lib/python3/dist-packages/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

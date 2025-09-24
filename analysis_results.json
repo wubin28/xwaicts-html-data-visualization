@@ -1,0 +1,888 @@
+{
+  "total_records": 80,
+  "multimodal_records": 47,
+  "agent_type_proportions": [
+    {
+      "agent_type": "创作型",
+      "proportion": 0.9285714285714286,
+      "multimodal_count": 13,
+      "total_count": 14
+    },
+    {
+      "agent_type": "任务型",
+      "proportion": 0.8125,
+      "multimodal_count": 13,
+      "total_count": 16
+    },
+    {
+      "agent_type": "对话型",
+      "proportion": 0.5833333333333334,
+      "multimodal_count": 14,
+      "total_count": 24
+    },
+    {
+      "agent_type": "混合型",
+      "proportion": 0.38461538461538464,
+      "multimodal_count": 5,
+      "total_count": 13
+    },
+    {
+      "agent_type": "分析型",
+      "proportion": 0.15384615384615385,
+      "multimodal_count": 2,
+      "total_count": 13
+    }
+  ],
+  "model_architecture_proportions": [
+    {
+      "model_architecture": "CNN+RNN",
+      "proportion": 1.0,
+      "multimodal_count": 1,
+      "total_count": 1
+    },
+    {
+      "model_architecture": "Transformer",
+      "proportion": 0.8461538461538461,
+      "multimodal_count": 11,
+      "total_count": 13
+    },
+    {
+      "model_architecture": "混合架构",
+      "proportion": 0.8333333333333334,
+      "multimodal_count": 5,
+      "total_count": 6
+    },
+    {
+      "model_architecture": "GAN",
+      "proportion": 0.7142857142857143,
+      "multimodal_count": 5,
+      "total_count": 7
+    },
+    {
+      "model_architecture": "CNN",
+      "proportion": 0.6666666666666666,
+      "multimodal_count": 6,
+      "total_count": 9
+    },
+    {
+      "model_architecture": "GPT架构",
+      "proportion": 0.625,
+      "multimodal_count": 5,
+      "total_count": 8
+    },
+    {
+      "model_architecture": "VAE",
+      "proportion": 0.5384615384615384,
+      "multimodal_count": 7,
+      "total_count": 13
+    },
+    {
+      "model_architecture": "BERT",
+      "proportion": 0.4,
+      "multimodal_count": 2,
+      "total_count": 5
+    },
+    {
+      "model_architecture": "Diffusion",
+      "proportion": 0.375,
+      "multimodal_count": 3,
+      "total_count": 8
+    },
+    {
+      "model_architecture": "LSTM",
+      "proportion": 0.25,
+      "multimodal_count": 1,
+      "total_count": 4
+    },
+    {
+      "model_architecture": "RNN",
+      "proportion": 0.16666666666666666,
+      "multimodal_count": 1,
+      "total_count": 6
+    }
+  ],
+  "task_bias_medians": [
+    {
+      "task_category": "商业智能",
+      "median_bias": 0.91,
+      "count": 1,
+      "values": [
+        0.91
+      ]
+    },
+    {
+      "task_category": "数据分析",
+      "median_bias": 0.9,
+      "count": 3,
+      "values": [
+        0.9,
+        0.86,
+        0.9
+      ]
+    },
+    {
+      "task_category": "时序分析",
+      "median_bias": 0.875,
+      "count": 4,
+      "values": [
+        0.89,
+        0.93,
+        0.86,
+        0.81
+      ]
+    },
+    {
+      "task_category": "对话系统",
+      "median_bias": 0.85,
+      "count": 5,
+      "values": [
+        0.78,
+        0.85,
+        0.87,
+        0.83,
+        0.89
+      ]
+    },
+    {
+      "task_category": "预测分析",
+      "median_bias": 0.85,
+      "count": 4,
+      "values": [
+        0.86,
+        0.84,
+        0.86,
+        0.83
+      ]
+    },
+    {
+      "task_category": "教育辅导",
+      "median_bias": 0.85,
+      "count": 4,
+      "values": [
+        0.83,
+        0.75,
+        0.88,
+        0.87
+      ]
+    },
+    {
+      "task_category": "问答系统",
+      "median_bias": 0.84,
+      "count": 3,
+      "values": [
+        0.84,
+        0.73,
+        0.88
+      ]
+    },
+    {
+      "task_category": "文本生成",
+      "median_bias": 0.82,
+      "count": 3,
+      "values": [
+        0.85,
+        0.82,
+        0.8
+      ]
+    },
+    {
+      "task_category": "自动驾驶",
+      "median_bias": 0.8049999999999999,
+      "count": 4,
+      "values": [
+        0.77,
+        0.78,
+        0.85,
+        0.83
+      ]
+    },
+    {
+      "task_category": "计算机视觉",
+      "median_bias": 0.79,
+      "count": 5,
+      "values": [
+        0.76,
+        0.82,
+        0.73,
+        0.79,
+        0.83
+      ]
+    },
+    {
+      "task_category": "客服机器人",
+      "median_bias": 0.78,
+      "count": 6,
+      "values": [
+        0.81,
+        0.72,
+        0.85,
+        0.88,
+        0.75,
+        0.73
+      ]
+    },
+    {
+      "task_category": "音乐生成",
+      "median_bias": 0.775,
+      "count": 6,
+      "values": [
+        0.8,
+        0.69,
+        0.75,
+        0.82,
+        0.85,
+        0.68
+      ]
+    },
+    {
+      "task_category": "代码生成",
+      "median_bias": 0.77,
+      "count": 9,
+      "values": [
+        0.88,
+        0.76,
+        0.66,
+        0.77,
+        0.8,
+        0.8,
+        0.79,
+        0.65,
+        0.76
+      ]
+    },
+    {
+      "task_category": "数据挖掘",
+      "median_bias": 0.765,
+      "count": 6,
+      "values": [
+        0.92,
+        0.73,
+        0.73,
+        0.83,
+        0.79,
+        0.74
+      ]
+    },
+    {
+      "task_category": "图像识别",
+      "median_bias": 0.75,
+      "count": 2,
+      "values": [
+        0.75,
+        0.75
+      ]
+    },
+    {
+      "task_category": "内容创作",
+      "median_bias": 0.75,
+      "count": 6,
+      "values": [
+        0.79,
+        0.73,
+        0.74,
+        0.76,
+        0.77,
+        0.7
+      ]
+    },
+    {
+      "task_category": "艺术创作",
+      "median_bias": 0.74,
+      "count": 1,
+      "values": [
+        0.74
+      ]
+    },
+    {
+      "task_category": "游戏AI",
+      "median_bias": 0.735,
+      "count": 2,
+      "values": [
+        0.76,
+        0.71
+      ]
+    },
+    {
+      "task_category": "图像生成",
+      "median_bias": 0.73,
+      "count": 2,
+      "values": [
+        0.72,
+        0.74
+      ]
+    },
+    {
+      "task_category": "视频生成",
+      "median_bias": 0.72,
+      "count": 4,
+      "values": [
+        0.68,
+        0.78,
+        0.67,
+        0.76
+      ]
+    }
+  ],
+  "raw_data": [
+    {
+      "agent_type": "对话型",
+      "model_architecture": "Transformer",
+      "multimodal_capability": true,
+      "task_category": "文本生成",
+      "bias_detection": 0.85
+    },
+    {
+      "agent_type": "对话型",
+      "model_architecture": "Transformer",
+      "multimodal_capability": true,
+      "task_category": "文本生成",
+      "bias_detection": 0.82
+    },
+    {
+      "agent_type": "对话型",
+      "model_architecture": "GPT架构",
+      "multimodal_capability": true,
+      "task_category": "对话系统",
+      "bias_detection": 0.78
+    },
+    {
+      "agent_type": "任务型",
+      "model_architecture": "Transformer",
+      "multimodal_capability": true,
+      "task_category": "代码生成",
+      "bias_detection": 0.88
+    },
+    {
+      "agent_type": "任务型",
+      "model_architecture": "CNN+RNN",
+      "multimodal_capability": true,
+      "task_category": "图像识别",
+      "bias_detection": 0.75
+    },
+    {
+      "agent_type": "任务型",
+      "model_architecture": "Transformer",
+      "multimodal_capability": false,
+      "task_category": "数据分析",
+      "bias_detection": 0.9
+    },
+    {
+      "agent_type": "创作型",
+      "model_architecture": "Diffusion",
+      "multimodal_capability": true,
+      "task_category": "图像生成",
+      "bias_detection": 0.72
+    },
+    {
+      "agent_type": "创作型",
+      "model_architecture": "GAN",
+      "multimodal_capability": true,
+      "task_category": "视频生成",
+      "bias_detection": 0.68
+    },
+    {
+      "agent_type": "创作型",
+      "model_architecture": "Transformer",
+      "multimodal_capability": true,
+      "task_category": "音乐生成",
+      "bias_detection": 0.8
+    },
+    {
+      "agent_type": "分析型",
+      "model_architecture": "Transformer",
+      "multimodal_capability": true,
+      "task_category": "数据挖掘",
+      "bias_detection": 0.92
+    },
+    {
+      "agent_type": "分析型",
+      "model_architecture": "RNN",
+      "multimodal_capability": false,
+      "task_category": "预测分析",
+      "bias_detection": 0.86
+    },
+    {
+      "agent_type": "分析型",
+      "model_architecture": "LSTM",
+      "multimodal_capability": false,
+      "task_category": "时序分析",
+      "bias_detection": 0.89
+    },
+    {
+      "agent_type": "对话型",
+      "model_architecture": "BERT",
+      "multimodal_capability": true,
+      "task_category": "问答系统",
+      "bias_detection": 0.84
+    },
+    {
+      "agent_type": "对话型",
+      "model_architecture": "Transformer",
+      "multimodal_capability": true,
+      "task_category": "客服机器人",
+      "bias_detection": 0.81
+    },
+    {
+      "agent_type": "任务型",
+      "model_architecture": "CNN",
+      "multimodal_capability": true,
+      "task_category": "计算机视觉",
+      "bias_detection": 0.76
+    },
+    {
+      "agent_type": "创作型",
+      "model_architecture": "VAE",
+      "multimodal_capability": true,
+      "task_category": "艺术创作",
+      "bias_detection": 0.74
+    },
+    {
+      "agent_type": "分析型",
+      "model_architecture": "Transformer",
+      "multimodal_capability": true,
+      "task_category": "商业智能",
+      "bias_detection": 0.91
+    },
+    {
+      "agent_type": "对话型",
+      "model_architecture": "GPT架构",
+      "multimodal_capability": true,
+      "task_category": "教育辅导",
+      "bias_detection": 0.83
+    },
+    {
+      "agent_type": "任务型",
+      "model_architecture": "混合架构",
+      "multimodal_capability": true,
+      "task_category": "自动驾驶",
+      "bias_detection": 0.77
+    },
+    {
+      "agent_type": "创作型",
+      "model_architecture": "Transformer",
+      "multimodal_capability": true,
+      "task_category": "内容创作",
+      "bias_detection": 0.79
+    },
+    {
+      "agent_type": "对话型",
+      "model_architecture": "Transformer",
+      "multimodal_capability": false,
+      "task_category": "音乐生成",
+      "bias_detection": 0.69
+    },
+    {
+      "agent_type": "对话型",
+      "model_architecture": "VAE",
+      "multimodal_capability": true,
+      "task_category": "内容创作",
+      "bias_detection": 0.73
+    },
+    {
+      "agent_type": "对话型",
+      "model_architecture": "GPT架构",
+      "multimodal_capability": false,
+      "task_category": "音乐生成",
+      "bias_detection": 0.75
+    },
+    {
+      "agent_type": "对话型",
+      "model_architecture": "VAE",
+      "multimodal_capability": false,
+      "task_category": "自动驾驶",
+      "bias_detection": 0.78
+    },
+    {
+      "agent_type": "分析型",
+      "model_architecture": "混合架构",
+      "multimodal_capability": false,
+      "task_category": "文本生成",
+      "bias_detection": 0.8
+    },
+    {
+      "agent_type": "任务型",
+      "model_architecture": "GAN",
+      "multimodal_capability": true,
+      "task_category": "数据挖掘",
+      "bias_detection": 0.73
+    },
+    {
+      "agent_type": "创作型",
+      "model_architecture": "GPT架构",
+      "multimodal_capability": true,
+      "task_category": "客服机器人",
+      "bias_detection": 0.72
+    },
+    {
+      "agent_type": "创作型",
+      "model_architecture": "混合架构",
+      "multimodal_capability": true,
+      "task_category": "对话系统",
+      "bias_detection": 0.85
+    },
+    {
+      "agent_type": "混合型",
+      "model_architecture": "GPT架构",
+      "multimodal_capability": false,
+      "task_category": "代码生成",
+      "bias_detection": 0.76
+    },
+    {
+      "agent_type": "混合型",
+      "model_architecture": "LSTM",
+      "multimodal_capability": false,
+      "task_category": "代码生成",
+      "bias_detection": 0.66
+    },
+    {
+      "agent_type": "任务型",
+      "model_architecture": "RNN",
+      "multimodal_capability": true,
+      "task_category": "音乐生成",
+      "bias_detection": 0.82
+    },
+    {
+      "agent_type": "分析型",
+      "model_architecture": "RNN",
+      "multimodal_capability": false,
+      "task_category": "问答系统",
+      "bias_detection": 0.73
+    },
+    {
+      "agent_type": "创作型",
+      "model_architecture": "CNN",
+      "multimodal_capability": true,
+      "task_category": "代码生成",
+      "bias_detection": 0.77
+    },
+    {
+      "agent_type": "任务型",
+      "model_architecture": "VAE",
+      "multimodal_capability": true,
+      "task_category": "图像生成",
+      "bias_detection": 0.74
+    },
+    {
+      "agent_type": "创作型",
+      "model_architecture": "VAE",
+      "multimodal_capability": true,
+      "task_category": "时序分析",
+      "bias_detection": 0.93
+    },
+    {
+      "agent_type": "对话型",
+      "model_architecture": "CNN",
+      "multimodal_capability": true,
+      "task_category": "时序分析",
+      "bias_detection": 0.86
+    },
+    {
+      "agent_type": "对话型",
+      "model_architecture": "CNN",
+      "multimodal_capability": false,
+      "task_category": "视频生成",
+      "bias_detection": 0.78
+    },
+    {
+      "agent_type": "分析型",
+      "model_architecture": "Diffusion",
+      "multimodal_capability": false,
+      "task_category": "数据挖掘",
+      "bias_detection": 0.73
+    },
+    {
+      "agent_type": "混合型",
+      "model_architecture": "VAE",
+      "multimodal_capability": false,
+      "task_category": "内容创作",
+      "bias_detection": 0.74
+    },
+    {
+      "agent_type": "混合型",
+      "model_architecture": "GAN",
+      "multimodal_capability": false,
+      "task_category": "音乐生成",
+      "bias_detection": 0.85
+    },
+    {
+      "agent_type": "任务型",
+      "model_architecture": "VAE",
+      "multimodal_capability": false,
+      "task_category": "代码生成",
+      "bias_detection": 0.8
+    },
+    {
+      "agent_type": "对话型",
+      "model_architecture": "BERT",
+      "multimodal_capability": false,
+      "task_category": "计算机视觉",
+      "bias_detection": 0.82
+    },
+    {
+      "agent_type": "分析型",
+      "model_architecture": "GAN",
+      "multimodal_capability": false,
+      "task_category": "教育辅导",
+      "bias_detection": 0.75
+    },
+    {
+      "agent_type": "混合型",
+      "model_architecture": "Transformer",
+      "multimodal_capability": true,
+      "task_category": "自动驾驶",
+      "bias_detection": 0.85
+    },
+    {
+      "agent_type": "创作型",
+      "model_architecture": "GPT架构",
+      "multimodal_capability": true,
+      "task_category": "计算机视觉",
+      "bias_detection": 0.73
+    },
+    {
+      "agent_type": "对话型",
+      "model_architecture": "RNN",
+      "multimodal_capability": false,
+      "task_category": "教育辅导",
+      "bias_detection": 0.88
+    },
+    {
+      "agent_type": "创作型",
+      "model_architecture": "VAE",
+      "multimodal_capability": true,
+      "task_category": "数据分析",
+      "bias_detection": 0.86
+    },
+    {
+      "agent_type": "任务型",
+      "model_architecture": "VAE",
+      "multimodal_capability": true,
+      "task_category": "游戏AI",
+      "bias_detection": 0.76
+    },
+    {
+      "agent_type": "对话型",
+      "model_architecture": "GPT架构",
+      "multimodal_capability": false,
+      "task_category": "预测分析",
+      "bias_detection": 0.84
+    },
+    {
+      "agent_type": "任务型",
+      "model_architecture": "混合架构",
+      "multimodal_capability": true,
+      "task_category": "代码生成",
+      "bias_detection": 0.8
+    },
+    {
+      "agent_type": "对话型",
+      "model_architecture": "VAE",
+      "multimodal_capability": false,
+      "task_category": "数据分析",
+      "bias_detection": 0.9
+    },
+    {
+      "agent_type": "混合型",
+      "model_architecture": "BERT",
+      "multimodal_capability": false,
+      "task_category": "教育辅导",
+      "bias_detection": 0.87
+    },
+    {
+      "agent_type": "分析型",
+      "model_architecture": "CNN",
+      "multimodal_capability": false,
+      "task_category": "预测分析",
+      "bias_detection": 0.86
+    },
+    {
+      "agent_type": "创作型",
+      "model_architecture": "Diffusion",
+      "multimodal_capability": false,
+      "task_category": "图像识别",
+      "bias_detection": 0.75
+    },
+    {
+      "agent_type": "对话型",
+      "model_architecture": "LSTM",
+      "multimodal_capability": true,
+      "task_category": "内容创作",
+      "bias_detection": 0.76
+    },
+    {
+      "agent_type": "混合型",
+      "model_architecture": "CNN",
+      "multimodal_capability": true,
+      "task_category": "代码生成",
+      "bias_detection": 0.79
+    },
+    {
+      "agent_type": "对话型",
+      "model_architecture": "CNN",
+      "multimodal_capability": true,
+      "task_category": "对话系统",
+      "bias_detection": 0.87
+    },
+    {
+      "agent_type": "对话型",
+      "model_architecture": "VAE",
+      "multimodal_capability": false,
+      "task_category": "数据挖掘",
+      "bias_detection": 0.83
+    },
+    {
+      "agent_type": "任务型",
+      "model_architecture": "VAE",
+      "multimodal_capability": true,
+      "task_category": "内容创作",
+      "bias_detection": 0.77
+    },
+    {
+      "agent_type": "任务型",
+      "model_architecture": "Diffusion",
+      "multimodal_capability": false,
+      "task_category": "视频生成",
+      "bias_detection": 0.67
+    },
+    {
+      "agent_type": "分析型",
+      "model_architecture": "LSTM",
+      "multimodal_capability": false,
+      "task_category": "计算机视觉",
+      "bias_detection": 0.79
+    },
+    {
+      "agent_type": "对话型",
+      "model_architecture": "GPT架构",
+      "multimodal_capability": true,
+      "task_category": "客服机器人",
+      "bias_detection": 0.85
+    },
+    {
+      "agent_type": "对话型",
+      "model_architecture": "CNN",
+      "multimodal_capability": false,
+      "task_category": "视频生成",
+      "bias_detection": 0.76
+    },
+    {
+      "agent_type": "任务型",
+      "model_architecture": "GAN",
+      "multimodal_capability": true,
+      "task_category": "数据挖掘",
+      "bias_detection": 0.79
+    },
+    {
+      "agent_type": "对话型",
+      "model_architecture": "Diffusion",
+      "multimodal_capability": true,
+      "task_category": "对话系统",
+      "bias_detection": 0.83
+    },
+    {
+      "agent_type": "混合型",
+      "model_architecture": "Transformer",
+      "multimodal_capability": true,
+      "task_category": "音乐生成",
+      "bias_detection": 0.68
+    },
+    {
+      "agent_type": "分析型",
+      "model_architecture": "Diffusion",
+      "multimodal_capability": false,
+      "task_category": "客服机器人",
+      "bias_detection": 0.88
+    },
+    {
+      "agent_type": "任务型",
+      "model_architecture": "GAN",
+      "multimodal_capability": true,
+      "task_category": "客服机器人",
+      "bias_detection": 0.75
+    },
+    {
+      "agent_type": "分析型",
+      "model_architecture": "RNN",
+      "multimodal_capability": false,
+      "task_category": "自动驾驶",
+      "bias_detection": 0.83
+    },
+    {
+      "agent_type": "分析型",
+      "model_architecture": "BERT",
+      "multimodal_capability": false,
+      "task_category": "预测分析",
+      "bias_detection": 0.83
+    },
+    {
+      "agent_type": "对话型",
+      "model_architecture": "混合架构",
+      "multimodal_capability": true,
+      "task_category": "时序分析",
+      "bias_detection": 0.81
+    },
+    {
+      "agent_type": "混合型",
+      "model_architecture": "Diffusion",
+      "multimodal_capability": false,
+      "task_category": "对话系统",
+      "bias_detection": 0.89
+    },
+    {
+      "agent_type": "对话型",
+      "model_architecture": "BERT",
+      "multimodal_capability": true,
+      "task_category": "游戏AI",
+      "bias_detection": 0.71
+    },
+    {
+      "agent_type": "任务型",
+      "model_architecture": "GAN",
+      "multimodal_capability": true,
+      "task_category": "内容创作",
+      "bias_detection": 0.7
+    },
+    {
+      "agent_type": "混合型",
+      "model_architecture": "Transformer",
+      "multimodal_capability": true,
+      "task_category": "计算机视觉",
+      "bias_detection": 0.83
+    },
+    {
+      "agent_type": "混合型",
+      "model_architecture": "VAE",
+      "multimodal_capability": false,
+      "task_category": "数据挖掘",
+      "bias_detection": 0.74
+    },
+    {
+      "agent_type": "创作型",
+      "model_architecture": "CNN",
+      "multimodal_capability": true,
+      "task_category": "客服机器人",
+      "bias_detection": 0.73
+    },
+    {
+      "agent_type": "创作型",
+      "model_architecture": "Diffusion",
+      "multimodal_capability": true,
+      "task_category": "代码生成",
+      "bias_detection": 0.65
+    },
+    {
+      "agent_type": "混合型",
+      "model_architecture": "混合架构",
+      "multimodal_capability": true,
+      "task_category": "代码生成",
+      "bias_detection": 0.76
+    },
+    {
+      "agent_type": "混合型",
+      "model_architecture": "RNN",
+      "multimodal_capability": false,
+      "task_category": "问答系统",
+      "bias_detection": 0.88
+    }
+  ]
+}
