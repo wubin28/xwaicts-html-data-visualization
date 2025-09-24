@@ -1,0 +1,5 @@
+请你严格按照riper-5工作流程完成一个生成数据看板的需求。
+
+riper-5工作流程参见 @rules-riper5.md。
+
+生成数据看板的需求参见 @requirements.md。
