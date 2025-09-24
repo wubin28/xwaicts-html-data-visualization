@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- 基础HTML5设置 / Basic HTML5 setup -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI智能体性能数据看板 / AI Agent Performance Dashboard</title>
+
+    <!-- 内嵌CSS样式 / Embedded CSS Styles -->
+    <style>
+        /* 全局样式重置和基础设置 / Global style reset and basic setup */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box; /* 确保边框和内边距包含在元素总宽度内 / Ensure borders and padding are included in total width */
+        }
+
+        /* 页面主体样式 / Body styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* 现代字体堆栈 / Modern font stack */
+            background-color: #f8f9fa; /* 浅灰色背景 / Light gray background */
+            color: #343a40; /* 深灰色文字 / Dark gray text */
+            line-height: 1.6; /* 增加行高提高可读性 / Increased line height for readability */
+            padding: 20px;
+        }
+
+        /* 主容器样式 / Main container styling */
+        .container {
+            max-width: 1200px; /* 限制最大宽度 / Limit maximum width */
+            margin: 0 auto; /* 居中显示 / Center alignment */
+            background-color: #ffffff; /* 白色背景 / White background */
+            border-radius: 12px; /* 圆角边框 / Rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 轻微阴影效果 / Subtle shadow effect */
+            padding: 30px;
+        }
+
+        /* 页面标题样式 / Page title styling */
+        h1 {
+            text-align: center;
+            color: #2c3e50; /* 深蓝灰色 / Dark blue-gray */
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            font-weight: 600;
+        }
+
+        /* 副标题样式 / Subtitle styling */
+        .subtitle {
+            text-align: center;
+            color: #6c757d; /* 中灰色 / Medium gray */
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        /* 数据信息样式 / Data info styling */
+        .data-info {
+            text-align: center;
+            background-color: #e3f2fd; /* 浅蓝色背景 / Light blue background */
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            border: 1px solid #bbdefb; /* 浅蓝色边框 / Light blue border */
+        }
+
+        /* 分析区块容器 / Analysis section container */
+        .analysis-grid {
+            display: grid; /* 使用CSS Grid布局 / Use CSS Grid layout */
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* 响应式网格 / Responsive grid */
+            gap: 30px; /* 网格间隙 / Grid gap */
+            margin-bottom: 30px;
+        }
+
+        /* 单个分析区块样式 / Individual analysis section styling */
+        .analysis-section {
+            background-color: #ffffff; /* 白色背景 / White background */
+            border: 1px solid #e9ecef; /* 浅灰色边框 / Light gray border */
+            border-radius: 10px; /* 圆角边框 / Rounded corners */
+            padding: 25px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); /* 轻微阴影 / Subtle shadow */
+        }
+
+        /* 分析区块标题样式 / Analysis section title styling */
+        .analysis-section h2 {
+            color: #495057; /* 深灰色 / Dark gray */
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            border-bottom: 2px solid #007bff; /* 蓝色底部边框 / Blue bottom border */
+            padding-bottom: 10px;
+        }
+
+        /* Canvas图表样式 / Canvas chart styling */
+        .chart-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        canvas {
+            border: 1px solid #dee2e6; /* 浅灰色边框 / Light gray border */
+            border-radius: 6px;
+            background-color: #fdfdfd; /* 非常浅的灰色背景 / Very light gray background */
+        }
+
+        /* 数据表格样式 / Data table styling */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse; /* 合并边框 / Collapse borders */
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 12px 8px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6; /* 底部边框 / Bottom border */
+        }
+
+        .data-table th {
+            background-color: #f8f9fa; /* 浅灰色表头背景 / Light gray header background */
+            font-weight: 600;
+            color: #495057; /* 深灰色文字 / Dark gray text */
+        }
+
+        .data-table tr:hover {
+            background-color: #f1f3f4; /* 悬停时的背景色 / Background color on hover */
+        }
+
+        /* 数值高亮样式 / Number highlighting styling */
+        .highlight-number {
+            font-weight: bold;
+            color: #007bff; /* 蓝色高亮 / Blue highlight */
+        }
+
+        /* 移动设备适配 / Mobile device adaptation */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px; /* 减少内边距 / Reduce padding */
+            }
+
+            .container {
+                padding: 20px; /* 减少容器内边距 / Reduce container padding */
+            }
+
+            h1 {
+                font-size: 2em; /* 减小标题字体 / Reduce title font size */
+            }
+
+            .analysis-grid {
+                grid-template-columns: 1fr; /* 单列布局 / Single column layout */
+                gap: 20px; /* 减小间隙 / Reduce gap */
+            }
+
+            canvas {
+                max-width: 100%; /* 确保图表不超出屏幕宽度 / Ensure charts don't exceed screen width */
+                height: auto;
+            }
+
+            .data-table {
+                font-size: 0.8em; /* 减小表格字体 / Reduce table font size */
+            }
+        }
+
+        /* 超小屏幕适配 / Extra small screen adaptation */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.6em;
+            }
+
+            .analysis-section {
+                padding: 15px; /* 进一步减少内边距 / Further reduce padding */
+            }
+
+            .data-table th,
+            .data-table td {
+                padding: 8px 4px; /* 减少表格单元格内边距 / Reduce table cell padding */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 主容器 / Main container -->
+    <div class="container">
+        <!-- 页面标题 / Page title -->
+        <h1>AI智能体性能数据看板</h1>
+        <h1 style="font-size: 1.8em; color: #6c757d; margin-top: -10px;">AI Agent Performance Dashboard</h1>
+
+        <!-- 数据集信息 / Dataset information -->
+        <div class="data-info">
+            <p><strong>数据集名称 / Dataset:</strong> Agentic AI Performance Dataset 2025</p>
+            <p><strong>处理日期 / Processing Date:</strong> <span id="processing-date">2025-09-25 00:02:03</span></p>
+            <p><strong>实际处理数据行数 / Actual Data Rows Processed:</strong> <span id="total-rows" class="highlight-number">80</span></p>
+        </div>
+
+        <!-- 分析结果网格布局 / Analysis results grid layout -->
+        <div class="analysis-grid">
+
+            <!-- 分析1：智能体类型多模态支持比例 / Analysis 1: Agent Type Multimodal Support Ratio -->
+            <div class="analysis-section">
+                <h2>分析1：智能体类型多模态支持比例 / Agent Type Multimodal Support Ratio</h2>
+                <p style="margin-bottom: 15px; color: #6c757d;">
+                    各智能体类型中支持多模态处理能力的占比排名 / Ranking of multimodal capability support ratio by agent type
+                </p>
+
+                <!-- 图表容器 / Chart container -->
+                <div class="chart-container">
+                    <canvas id="agentChart" width="400" height="300"></canvas>
+                </div>
+
+                <!-- 数据表格 / Data table -->
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>排名 / Rank</th>
+                            <th>智能体类型 / Agent Type</th>
+                            <th>支持比例 / Support Ratio</th>
+                            <th>支持数/总数 / Support/Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="agent-table-body">
+                        <!-- 数据将通过JavaScript动态生成 / Data will be generated dynamically by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 分析2：大模型架构多模态支持比例 / Analysis 2: Model Architecture Multimodal Support Ratio -->
+            <div class="analysis-section">
+                <h2>分析2：大模型架构多模态支持比例 / Model Architecture Multimodal Support Ratio</h2>
+                <p style="margin-bottom: 15px; color: #6c757d;">
+                    各大模型架构中支持多模态处理能力的占比排名 / Ranking of multimodal capability support ratio by model architecture
+                </p>
+
+                <!-- 图表容器 / Chart container -->
+                <div class="chart-container">
+                    <canvas id="modelChart" width="400" height="300"></canvas>
+                </div>
+
+                <!-- 数据表格 / Data table -->
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>排名 / Rank</th>
+                            <th>模型架构 / Model Architecture</th>
+                            <th>支持比例 / Support Ratio</th>
+                            <th>支持数/总数 / Support/Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="model-table-body">
+                        <!-- 数据将通过JavaScript动态生成 / Data will be generated dynamically by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 分析3：任务类别偏见检测得分中位数 / Analysis 3: Task Category Bias Detection Score Median -->
+            <div class="analysis-section">
+                <h2>分析3：任务类别偏见检测得分中位数 / Task Category Bias Detection Score Median</h2>
+                <p style="margin-bottom: 15px; color: #6c757d;">
+                    各任务类别智能体表现公正性得分的中位数排名 / Ranking of bias detection score median by task category
+                </p>
+
+                <!-- 图表容器 / Chart container -->
+                <div class="chart-container">
+                    <canvas id="taskChart" width="400" height="300"></canvas>
+                </div>
+
+                <!-- 数据表格 / Data table -->
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>排名 / Rank</th>
+                            <th>任务类别 / Task Category</th>
+                            <th>中位数得分 / Median Score</th>
+                            <th>样本数量 / Sample Count</th>
+                        </tr>
+                    </thead>
+                    <tbody id="task-table-body">
+                        <!-- 数据将通过JavaScript动态生成 / Data will be generated dynamically by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 页脚信息 / Footer information -->
+        <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #dee2e6; color: #6c757d;">
+            <p>数据可视化看板 | 基于Kaggle "Agentic AI Performance Dataset 2025" / Data Visualization Dashboard | Based on Kaggle "Agentic AI Performance Dataset 2025"</p>
+            <p style="margin-top: 5px;">新手友好的HTML + CSS + JavaScript实现 / Beginner-friendly HTML + CSS + JavaScript Implementation</p>
+        </div>
+    </div>
+
+    <!-- JavaScript代码 / JavaScript Code -->
+    <script>
+        // AI智能体性能数据分析结果 / AI Agent Performance Data Analysis Results
+        // 数据处理日期 / Data processed date: 2025-09-25 00:02:03
+        // 总数据行数 / Total data rows: 80
+
+        // 分析1：智能体类型多模态支持比例前3名 / Analysis 1: Top 3 Agent Types by Multimodal Support Ratio
+        const agentTypeData = [
+            {
+                "name": "Research Assistant",
+                "ratio": 0.6,
+                "support_count": 3,
+                "total_count": 5
+            },
+            {
+                "name": "Document Processor",
+                "ratio": 0.333,
+                "support_count": 2,
+                "total_count": 6
+            },
+            {
+                "name": "Sales Assistant",
+                "ratio": 0.286,
+                "support_count": 2,
+                "total_count": 7
+            }
+        ];
+
+        // 分析2：大模型架构多模态支持比例前3名 / Analysis 2: Top 3 Model Architectures by Multimodal Support Ratio
+        const modelArchitectureData = [
+            {
+                "name": "GPT-4o",
+                "ratio": 0.375,
+                "support_count": 3,
+                "total_count": 8
+            },
+            {
+                "name": "CodeT5+",
+                "ratio": 0.333,
+                "support_count": 3,
+                "total_count": 9
+            },
+            {
+                "name": "Transformer-XL",
+                "ratio": 0.2,
+                "support_count": 2,
+                "total_count": 10
+            }
+        ];
+
+        // 分析3：任务类别偏见检测得分中位数前3名 / Analysis 3: Top 3 Task Categories by Bias Detection Score Median
+        const taskCategoryData = [
+            {
+                "name": "Communication",
+                "median_score": 0.821,
+                "sample_count": 5
+            },
+            {
+                "name": "Research & Summarization",
+                "median_score": 0.785,
+                "sample_count": 4
+            },
+            {
+                "name": "Decision Making",
+                "median_score": 0.782,
+                "sample_count": 5
+            }
+        ];
+
+        // 数据集信息 / Dataset Information
+        const datasetInfo = {
+            totalRows: 80,
+            analysisDate: "2025-09-25 00:02:03"
+        };
+
+        /**
+         * 绘制水平条形图的通用函数 / Generic function to draw horizontal bar charts
+         * @param {string} canvasId - Canvas元素的ID / Canvas element ID
+         * @param {Array} data - 数据数组 / Data array
+         * @param {string} valueKey - 数值字段名 / Value field name
+         * @param {string} nameKey - 名称字段名 / Name field name
+         * @param {string} title - 图表标题 / Chart title
+         * @param {string} valueLabel - 数值标签 / Value label
+         * @param {string} color - 条形颜色 / Bar color
+         */
+        function drawHorizontalBarChart(canvasId, data, valueKey, nameKey, title, valueLabel, color = '#007bff') {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+
+            // 清空画布 / Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // 图表配置 / Chart configuration
+            const padding = 50;
+            const chartWidth = canvas.width - 2 * padding;
+            const chartHeight = canvas.height - 2 * padding;
+            const barHeight = chartHeight / data.length * 0.6; // 条形高度，留出间距 / Bar height with spacing
+            const barSpacing = chartHeight / data.length * 0.4; // 条形间距 / Bar spacing
+
+            // 找出最大值用于缩放 / Find maximum value for scaling
+            const maxValue = Math.max(...data.map(item => item[valueKey]));
+
+            // 设置字体和样式 / Set font and style
+            ctx.font = '12px Arial';
+            ctx.fillStyle = '#333';
+
+            // 绘制每个条形 / Draw each bar
+            data.forEach((item, index) => {
+                const barWidth = (item[valueKey] / maxValue) * (chartWidth - 120); // 预留标签空间 / Reserve space for labels
+                const x = padding + 120; // 从标签后开始 / Start after labels
+                const y = padding + index * (barHeight + barSpacing);
+
+                // 绘制条形 / Draw bar
+                ctx.fillStyle = color;
+                ctx.fillRect(x, y, barWidth, barHeight);
+
+                // 绘制条形边框 / Draw bar border
+                ctx.strokeStyle = '#0056b3';
+                ctx.lineWidth = 1;
+                ctx.strokeRect(x, y, barWidth, barHeight);
+
+                // 绘制标签（左侧） / Draw labels (left side)
+                ctx.fillStyle = '#333';
+                ctx.textAlign = 'right';
+                ctx.fillText(item[nameKey], x - 10, y + barHeight/2 + 4);
+
+                // 绘制数值（条形内或右侧） / Draw values (inside bar or right side)
+                ctx.textAlign = 'left';
+                const valueText = typeof item[valueKey] === 'number' ?
+                    (item[valueKey] < 1 ? (item[valueKey] * 100).toFixed(1) + '%' : item[valueKey].toFixed(3)) :
+                    item[valueKey].toString();
+
+                ctx.fillStyle = '#fff';
+                ctx.fillText(valueText, x + 5, y + barHeight/2 + 4);
+            });
+
+            // 绘制标题 / Draw title
+            ctx.font = 'bold 14px Arial';
+            ctx.fillStyle = '#333';
+            ctx.textAlign = 'center';
+            ctx.fillText(title, canvas.width/2, 25);
+        }
+
+        /**
+         * 生成数据表格的通用函数 / Generic function to generate data tables
+         * @param {string} tableBodyId - 表格body元素的ID / Table body element ID
+         * @param {Array} data - 数据数组 / Data array
+         * @param {Function} rowGenerator - 行生成函数 / Row generator function
+         */
+        function generateTable(tableBodyId, data, rowGenerator) {
+            const tbody = document.getElementById(tableBodyId);
+            tbody.innerHTML = ''; // 清空现有内容 / Clear existing content
+
+            data.forEach((item, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = rowGenerator(item, index + 1);
+                tbody.appendChild(row);
+            });
+        }
+
+        /**
+         * 更新页面信息 / Update page information
+         */
+        function updatePageInfo() {
+            document.getElementById('processing-date').textContent = datasetInfo.analysisDate;
+            document.getElementById('total-rows').textContent = datasetInfo.totalRows;
+        }
+
+        /**
+         * 页面加载完成后初始化图表和表格 / Initialize charts and tables after page load
+         */
+        function initializeDashboard() {
+            // 更新页面信息 / Update page information
+            updatePageInfo();
+
+            // 绘制智能体类型图表 / Draw agent type chart
+            drawHorizontalBarChart(
+                'agentChart',
+                agentTypeData,
+                'ratio',
+                'name',
+                '智能体类型多模态支持比例 / Agent Type Multimodal Support Ratio',
+                'Support Ratio',
+                '#28a745'
+            );
+
+            // 生成智能体类型表格 / Generate agent type table
+            generateTable('agent-table-body', agentTypeData, (item, rank) => `
+                <td><strong>${rank}</strong></td>
+                <td>${item.name}</td>
+                <td><span class="highlight-number">${(item.ratio * 100).toFixed(1)}%</span></td>
+                <td>${item.support_count}/${item.total_count}</td>
+            `);
+
+            // 绘制模型架构图表 / Draw model architecture chart
+            drawHorizontalBarChart(
+                'modelChart',
+                modelArchitectureData,
+                'ratio',
+                'name',
+                '模型架构多模态支持比例 / Model Architecture Multimodal Support Ratio',
+                'Support Ratio',
+                '#17a2b8'
+            );
+
+            // 生成模型架构表格 / Generate model architecture table
+            generateTable('model-table-body', modelArchitectureData, (item, rank) => `
+                <td><strong>${rank}</strong></td>
+                <td>${item.name}</td>
+                <td><span class="highlight-number">${(item.ratio * 100).toFixed(1)}%</span></td>
+                <td>${item.support_count}/${item.total_count}</td>
+            `);
+
+            // 绘制任务类别图表 / Draw task category chart
+            drawHorizontalBarChart(
+                'taskChart',
+                taskCategoryData,
+                'median_score',
+                'name',
+                '任务类别偏见检测得分中位数 / Task Category Bias Detection Score Median',
+                'Median Score',
+                '#fd7e14'
+            );
+
+            // 生成任务类别表格 / Generate task category table
+            generateTable('task-table-body', taskCategoryData, (item, rank) => `
+                <td><strong>${rank}</strong></td>
+                <td>${item.name}</td>
+                <td><span class="highlight-number">${item.median_score.toFixed(3)}</span></td>
+                <td>${item.sample_count}</td>
+            `);
+        }
+
+        // 当DOM内容加载完成时初始化看板 / Initialize dashboard when DOM content is loaded
+        document.addEventListener('DOMContentLoaded', initializeDashboard);
+
+        // 窗口大小改变时重新绘制图表（响应式支持） / Redraw charts when window is resized (responsive support)
+        window.addEventListener('resize', function() {
+            setTimeout(initializeDashboard, 100); // 延迟100ms重新绘制 / Redraw with 100ms delay
+        });
+    </script>
+</body>
+</html>
