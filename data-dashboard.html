@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic AI Performance Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .overview {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .overview h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .overview-item {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .overview-item h3 {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        
+        .overview-item p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .section {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .chart-container {
+            margin-bottom: 25px;
+        }
+        
+        .chart {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            height: 30px;
+            border-radius: 15px;
+            margin: 10px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chart-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #45a049);
+            border-radius: 15px;
+            transition: width 0.3s ease;
+        }
+        
+        .chart-label {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .chart-value {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        th {
+            background-color: #667eea;
+            color: white;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tr:hover {
+            background-color: #e9ecef;
+        }
+        
+        .rank-1 { background-color: #fff3cd !important; }
+        .rank-2 { background-color: #d1ecf1 !important; }
+        .rank-3 { background-color: #d4edda !important; }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .overview-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section {
+                padding: 15px;
+            }
+            
+            th, td {
+                padding: 8px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 Agentic AI Performance Dashboard</h1>
+            <p>基于Agentic AI Performance Dataset 2025的数据分析看板</p>
+        </div>
+        
+        <div class="overview">
+            <h2>📊 数据概览</h2>
+            <div class="overview-grid">
+                <div class="overview-item">
+                    <h3>80</h3>
+                    <p>总记录数</p>
+                </div>
+                <div class="overview-item">
+                    <h3>16</h3>
+                    <p>智能体类型</p>
+                </div>
+                <div class="overview-item">
+                    <h3>10</h3>
+                    <p>模型架构</p>
+                </div>
+                <div class="overview-item">
+                    <h3>10</h3>
+                    <p>任务类别</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>📈 问题1: 智能体类型多模态支持占比排名</h2>
+            <div class="chart-container">
+    
+                <div class="chart">
+                    <div class="chart-fill" style="width: 60.0%"></div>
+                    <span class="chart-label">Research Assistant</span>
+                    <span class="chart-value">60.00%</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 33.33333333333333%"></div>
+                    <span class="chart-label">Document Processor</span>
+                    <span class="chart-value">33.33%</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 28.57142857142857%"></div>
+                    <span class="chart-label">Sales Assistant</span>
+                    <span class="chart-value">28.57%</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 25.0%"></div>
+                    <span class="chart-label">HR Recruiter</span>
+                    <span class="chart-value">25.00%</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 20.0%"></div>
+                    <span class="chart-label">Code Assistant</span>
+                    <span class="chart-value">20.00%</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 20.0%"></div>
+                    <span class="chart-label">Content Creator</span>
+                    <span class="chart-value">20.00%</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 16.666666666666664%"></div>
+                    <span class="chart-label">Data Analyst</span>
+                    <span class="chart-value">16.67%</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 16.666666666666664%"></div>
+                    <span class="chart-label">Customer Service</span>
+                    <span class="chart-value">16.67%</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 0.0%"></div>
+                    <span class="chart-label">Financial Advisor</span>
+                    <span class="chart-value">0.00%</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 0.0%"></div>
+                    <span class="chart-label">Email Manager</span>
+                    <span class="chart-value">0.00%</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 0.0%"></div>
+                    <span class="chart-label">Project Manager</span>
+                    <span class="chart-value">0.00%</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 0.0%"></div>
+                    <span class="chart-label">Marketing Assistant</span>
+                    <span class="chart-value">0.00%</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 0.0%"></div>
+                    <span class="chart-label">QA Tester</span>
+                    <span class="chart-value">0.00%</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 0.0%"></div>
+                    <span class="chart-label">Social Media Manager</span>
+                    <span class="chart-value">0.00%</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 0.0%"></div>
+                    <span class="chart-label">Task Planner</span>
+                    <span class="chart-value">0.00%</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 0.0%"></div>
+                    <span class="chart-label">Translation Agent</span>
+                    <span class="chart-value">0.00%</span>
+                </div>
+        
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>排名</th>
+                            <th>智能体类型</th>
+                            <th>多模态支持率</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+    
+                        <tr class="rank-1">
+                            <td>1</td>
+                            <td>Research Assistant</td>
+                            <td>60.00%</td>
+                        </tr>
+        
+                        <tr class="rank-2">
+                            <td>2</td>
+                            <td>Document Processor</td>
+                            <td>33.33%</td>
+                        </tr>
+        
+                        <tr class="rank-3">
+                            <td>3</td>
+                            <td>Sales Assistant</td>
+                            <td>28.57%</td>
+                        </tr>
+        
+                        <tr class="">
+                            <td>4</td>
+                            <td>HR Recruiter</td>
+                            <td>25.00%</td>
+                        </tr>
+        
+                        <tr class="">
+                            <td>5</td>
+                            <td>Code Assistant</td>
+                            <td>20.00%</td>
+                        </tr>
+        
+                        <tr class="">
+                            <td>6</td>
+                            <td>Content Creator</td>
+                            <td>20.00%</td>
+                        </tr>
+        
+                        <tr class="">
+                            <td>7</td>
+                            <td>Data Analyst</td>
+                            <td>16.67%</td>
+                        </tr>
+        
+                        <tr class="">
+                            <td>8</td>
+                            <td>Customer Service</td>
+                            <td>16.67%</td>
+                        </tr>
+        
+                        <tr class="">
+                            <td>9</td>
+                            <td>Financial Advisor</td>
+                            <td>0.00%</td>
+                        </tr>
+        
+                        <tr class="">
+                            <td>10</td>
+                            <td>Email Manager</td>
+                            <td>0.00%</td>
+                        </tr>
+        
+                        <tr class="">
+                            <td>11</td>
+                            <td>Project Manager</td>
+                            <td>0.00%</td>
+                        </tr>
+        
+                        <tr class="">
+                            <td>12</td>
+                            <td>Marketing Assistant</td>
+                            <td>0.00%</td>
+                        </tr>
+        
+                        <tr class="">
+                            <td>13</td>
+                            <td>QA Tester</td>
+                            <td>0.00%</td>
+                        </tr>
+        
+                        <tr class="">
+                            <td>14</td>
+                            <td>Social Media Manager</td>
+                            <td>0.00%</td>
+                        </tr>
+        
+                        <tr class="">
+                            <td>15</td>
+                            <td>Task Planner</td>
+                            <td>0.00%</td>
+                        </tr>
+        
+                        <tr class="">
+                            <td>16</td>
+                            <td>Translation Agent</td>
+                            <td>0.00%</td>
+                        </tr>
+        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    
+        <div class="section">
+            <h2>📊 问题2: 模型架构多模态支持占比排名</h2>
+            <div class="chart-container">
+    
+                <div class="chart">
+                    <div class="chart-fill" style="width: 37.5%"></div>
+                    <span class="chart-label">GPT-4o</span>
+                    <span class="chart-value">37.50%</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 33.33333333333333%"></div>
+                    <span class="chart-label">CodeT5+</span>
+                    <span class="chart-value">33.33%</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 20.0%"></div>
+                    <span class="chart-label">Transformer-XL</span>
+                    <span class="chart-value">20.00%</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 16.666666666666664%"></div>
+                    <span class="chart-label">Gemini-Pro</span>
+                    <span class="chart-value">16.67%</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 12.5%"></div>
+                    <span class="chart-label">Claude-3.5</span>
+                    <span class="chart-value">12.50%</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 11.11111111111111%"></div>
+                    <span class="chart-label">Mixtral-8x7B</span>
+                    <span class="chart-value">11.11%</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 10.0%"></div>
+                    <span class="chart-label">InstructGPT</span>
+                    <span class="chart-value">10.00%</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 0.0%"></div>
+                    <span class="chart-label">Falcon-180B</span>
+                    <span class="chart-value">0.00%</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 0.0%"></div>
+                    <span class="chart-label">LLaMA-3</span>
+                    <span class="chart-value">0.00%</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 0.0%"></div>
+                    <span class="chart-label">PaLM-2</span>
+                    <span class="chart-value">0.00%</span>
+                </div>
+        
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>排名</th>
+                            <th>模型架构</th>
+                            <th>多模态支持率</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+    
+                        <tr class="rank-1">
+                            <td>1</td>
+                            <td>GPT-4o</td>
+                            <td>37.50%</td>
+                        </tr>
+        
+                        <tr class="rank-2">
+                            <td>2</td>
+                            <td>CodeT5+</td>
+                            <td>33.33%</td>
+                        </tr>
+        
+                        <tr class="rank-3">
+                            <td>3</td>
+                            <td>Transformer-XL</td>
+                            <td>20.00%</td>
+                        </tr>
+        
+                        <tr class="">
+                            <td>4</td>
+                            <td>Gemini-Pro</td>
+                            <td>16.67%</td>
+                        </tr>
+        
+                        <tr class="">
+                            <td>5</td>
+                            <td>Claude-3.5</td>
+                            <td>12.50%</td>
+                        </tr>
+        
+                        <tr class="">
+                            <td>6</td>
+                            <td>Mixtral-8x7B</td>
+                            <td>11.11%</td>
+                        </tr>
+        
+                        <tr class="">
+                            <td>7</td>
+                            <td>InstructGPT</td>
+                            <td>10.00%</td>
+                        </tr>
+        
+                        <tr class="">
+                            <td>8</td>
+                            <td>Falcon-180B</td>
+                            <td>0.00%</td>
+                        </tr>
+        
+                        <tr class="">
+                            <td>9</td>
+                            <td>LLaMA-3</td>
+                            <td>0.00%</td>
+                        </tr>
+        
+                        <tr class="">
+                            <td>10</td>
+                            <td>PaLM-2</td>
+                            <td>0.00%</td>
+                        </tr>
+        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    
+        <div class="section">
+            <h2>⚖️ 问题3: 任务类别公正性中位数排名</h2>
+            <div class="chart-container">
+    
+                <div class="chart">
+                    <div class="chart-fill" style="width: 100.0%"></div>
+                    <span class="chart-label">Communication</span>
+                    <span class="chart-value">0.821400</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 95.61115169223277%"></div>
+                    <span class="chart-label">Research & Summarization</span>
+                    <span class="chart-value">0.785350</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 95.15461407353298%"></div>
+                    <span class="chart-label">Decision Making</span>
+                    <span class="chart-value">0.781600</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 94.78938397857316%"></div>
+                    <span class="chart-label">Text Processing</span>
+                    <span class="chart-value">0.778600</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 93.69978086194301%"></div>
+                    <span class="chart-label">Problem Solving</span>
+                    <span class="chart-value">0.769650</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 91.03968833698563%"></div>
+                    <span class="chart-label">Data Analysis</span>
+                    <span class="chart-value">0.747800</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 90.6927197467738%"></div>
+                    <span class="chart-label">Creative Writing</span>
+                    <span class="chart-value">0.744950</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 89.09788166544924%"></div>
+                    <span class="chart-label">Planning & Scheduling</span>
+                    <span class="chart-value">0.731850</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 85.79254930606281%"></div>
+                    <span class="chart-label">Code Generation</span>
+                    <span class="chart-value">0.704700</span>
+                </div>
+        
+                <div class="chart">
+                    <div class="chart-fill" style="width: 84.25249573898222%"></div>
+                    <span class="chart-label">Learning & Adaptation</span>
+                    <span class="chart-value">0.692050</span>
+                </div>
+        
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>排名</th>
+                            <th>任务类别</th>
+                            <th>公正性中位数</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+    
+                        <tr class="rank-1">
+                            <td>1</td>
+                            <td>Communication</td>
+                            <td>0.821400</td>
+                        </tr>
+        
+                        <tr class="rank-2">
+                            <td>2</td>
+                            <td>Research & Summarization</td>
+                            <td>0.785350</td>
+                        </tr>
+        
+                        <tr class="rank-3">
+                            <td>3</td>
+                            <td>Decision Making</td>
+                            <td>0.781600</td>
+                        </tr>
+        
+                        <tr class="">
+                            <td>4</td>
+                            <td>Text Processing</td>
+                            <td>0.778600</td>
+                        </tr>
+        
+                        <tr class="">
+                            <td>5</td>
+                            <td>Problem Solving</td>
+                            <td>0.769650</td>
+                        </tr>
+        
+                        <tr class="">
+                            <td>6</td>
+                            <td>Data Analysis</td>
+                            <td>0.747800</td>
+                        </tr>
+        
+                        <tr class="">
+                            <td>7</td>
+                            <td>Creative Writing</td>
+                            <td>0.744950</td>
+                        </tr>
+        
+                        <tr class="">
+                            <td>8</td>
+                            <td>Planning & Scheduling</td>
+                            <td>0.731850</td>
+                        </tr>
+        
+                        <tr class="">
+                            <td>9</td>
+                            <td>Code Generation</td>
+                            <td>0.704700</td>
+                        </tr>
+        
+                        <tr class="">
+                            <td>10</td>
+                            <td>Learning & Adaptation</td>
+                            <td>0.692050</td>
+                        </tr>
+        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    
+        <div class="footer">
+            <p>Generated on 2025-09-27 21:36:37 | Agentic AI Performance Analysis</p>
+        </div>
+    </div>
+</body>
+</html>
