@@ -146,16 +146,16 @@ def analyze_task_categories_bias_detection(df):
     bias_medians = {}
     
     for task_category, group_data in task_groups:
-        # Calculate median bias detection score
+        # Calculate median bias detection score with 4 decimal places precision
         median_score = group_data['bias_detection_score'].median()
-        bias_medians[task_category] = round(median_score, 1)
+        bias_medians[task_category] = round(median_score, 4)
         
-        # Show some statistics for learning
+        # Show some statistics for learning with 4 decimal places
         count = len(group_data)
         min_score = group_data['bias_detection_score'].min()
         max_score = group_data['bias_detection_score'].max()
         
-        print(f"  {task_category}: median={median_score:.1f} (count={count}, range={min_score:.1f}-{max_score:.1f})")
+        print(f"  {task_category}: median={median_score:.4f} (count={count}, range={min_score:.4f}-{max_score:.4f})")
     
     # Sort by median score (highest first) and get top 3
     sorted_results = sorted(bias_medians.items(), key=lambda x: x[1], reverse=True)
@@ -163,7 +163,7 @@ def analyze_task_categories_bias_detection(df):
     
     print("\n✓ Top 3 Task Categories by Bias Detection Median Score:")
     for i, (task_category, median_score) in enumerate(top_3_task_categories, 1):
-        print(f"  {i}. {task_category}: {median_score}")
+        print(f"  {i}. {task_category}: {median_score:.4f}")
     
     return top_3_task_categories
 
@@ -552,7 +552,7 @@ def generate_html_dashboard(top_3_agent_types, top_3_architectures, top_3_task_c
                     tooltip: {{
                         callbacks: {{
                             label: function(context) {{
-                                return 'Score: ' + context.parsed.y;
+                                return 'Score: ' + context.parsed.y.toFixed(4);
                             }}
                         }}
                     }}
@@ -560,6 +560,11 @@ def generate_html_dashboard(top_3_agent_types, top_3_architectures, top_3_task_c
                 scales: {{
                     y: {{
                         beginAtZero: true,
+                        ticks: {{
+                            callback: function(value) {{
+                                return value.toFixed(4);
+                            }}
+                        }},
                         grid: {{
                             color: 'rgba(0,0,0,0.1)'
                         }}
