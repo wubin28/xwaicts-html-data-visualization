@@ -343,3 +343,62 @@ Once I complete the data structure research, I will be ready for you to command 
 
 Please provide the data structure information so I can complete the RESEARCH phase according to protocol.
 ```
+
+Me:
+
+bubbling-logs.md中输入:
+```
+看来 @rules-riper5.md 的research mode相关规则设计得不合理。我已经将 @rules-riper5.md 文件中的相关规则修改为: [MODE: RESEARCH]
+
+- **Purpose**: Information gathering ONLY
+- **Permitted**: Reading files (including generating code such as python to read files), asking clarifying questions, understanding code structure
+- **Forbidden**: Suggestions, implementations (except for generating code such as python to read files), planning, or any hint of action
+- **Requirement**: You may ONLY seek to understand what exists, not what could be
+- **Duration**: Until I explicitly signal to move to next mode
+- **Output Format**: Begin with [MODE: RESEARCH], then ONLY observations and questions。请你按照新修改的规则重新进行research。
+```
+
+点击“enhance prompt”按钮:
+
+Augment Code优化提示词:
+
+```
+**UPDATED RIPER-5 RESEARCH MODE PROTOCOL**
+
+I have modified the RESEARCH mode rules in `@rules-riper5.md` to be more practical. The updated RESEARCH mode now allows:
+
+**[MODE: RESEARCH] - UPDATED RULES:**
+- **Purpose**: Information gathering ONLY
+- **Permitted**: 
+  - Reading files and examining data structures
+  - **Generating Python code specifically for reading and analyzing files** (this is now explicitly allowed)
+  - Asking clarifying questions
+  - Understanding existing code structure
+- **Forbidden**: 
+  - Suggestions for improvements
+  - Final implementations 
+  - Planning (except for data reading/analysis code)
+  - Any action hints beyond data examination
+- **Requirement**: You may ONLY seek to understand what exists, not what could be improved
+- **Duration**: Until I explicitly signal to move to next mode
+- **Output Format**: Begin with [MODE: RESEARCH], then provide ONLY observations and questions
+
+**IMMEDIATE ACTION REQUIRED:**
+Please proceed with the RESEARCH mode analysis using these updated rules. You are now authorized to:
+1. Create a Python virtual environment in the `venv` directory
+2. Generate Python code to read and analyze the Excel file `first-80-rows-agentic_ai_performance_dataset_20250622.xlsx`
+3. Report your findings about the dataset structure, column names, data types, and content
+4. Provide observations about data quality and format requirements
+
+Follow the virtual environment setup protocol as previously specified, and pause for password input if sudo access is required during package installation.
+```
+
+Me:
+
+Pressed the "Send" button.
+
+Augment Code:
+
+```
+
+```
