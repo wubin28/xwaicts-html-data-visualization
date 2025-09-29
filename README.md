@@ -6,6 +6,19 @@ A Python-based project for analyzing and visualizing AI agent performance metric
 
 This project evaluates the performance of various AI-assisted programming tools and their associated large language models through practical implementation challenges. Rather than relying solely on programming competition scores, we assess these rapidly evolving AI coding tools through real-world tasks that generate HTML data visualization dashboards, providing meaningful insights into their actual capabilities and effectiveness.
 
+## Evaluation Methodology
+
+Each Git branch represents a single evaluation session, with branch names containing comprehensive evaluation metadata. For example, the branch `2025-09-28--20-09-satisfied-by-codebuddycode-with-default-deepseekv3.1-in-codebuddycn-on-wsl` indicates:
+
+- **Timestamp**: Evaluation started on September 28, 2025, at 20:09
+- **Result**: "satisfied" - indicating satisfactory performance
+- **AI CLI Tool**: CodeBuddy Code IDE
+- **Model**: Default configuration with DeepSeek v3.1 large language model
+- **AI IDE**: CodeBuddyCN (China domestic version) built-in terminal
+- **Platform**: Windows 11 WSL2 Ubuntu 24.04
+
+This systematic naming convention enables tracking and comparison of different AI tool combinations across various environments and configurations.
+
 ## Project Description
 
 This project processes and visualizes data from the "Agentic AI Performance Dataset 2025" to answer three key research questions about AI agent capabilities:
