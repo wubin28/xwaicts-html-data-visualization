@@ -85,6 +85,47 @@ def detect_columns(cols: List[str]) -> Dict[str, Optional[str]]:
         "bias_detection": bias_col,
     }
 
+# -----------------------------
+# Header row auto-detection
+# -----------------------------
+
+def detect_header_row_from_raw(df_raw: pd.DataFrame, search_rows: int = 20) -> Optional[int]:
+    """Detect the first row (0-based) within the first `search_rows` that contains
+    at least TWO distinct candidate field names among our canonicals, based on
+    flexible token matching. Returns the row index or None if not found.
+    """
+    n = min(search_rows, len(df_raw))
+
+    def has_all(s: str, toks: List[str]) -> bool:
+        return all(t in s for t in toks)
+
+    for r in range(n):
+        try:
+            vals = df_raw.iloc[r].tolist()
+        except Exception:
+            continue
+        seen = set()
+        for cell in vals:
+            if pd.isna(cell):
+                continue
+            s = _clean_col_name(str(cell))
+            if not s or s.startswith("unnamed"):
+                continue
+            if has_all(s, ["agent", "type"]):
+                seen.add("agent_type")
+            if has_all(s, ["model", "architecture"]):
+                seen.add("model_architecture")
+            if "task" in s:
+                seen.add("task_category")
+            if ("multimodal" in s) and ("capability" in s or "capab" in s or "support" in s or "ability" in s):
+                seen.add("multimodal_capability")
+            if ("bias" in s) and ("detect" in s or "detection" in s or "score" in s):
+                seen.add("bias_detection")
+        if len(seen) >= 2:
+            return r
+    return None
+
+
 
 # -----------------------------
 # Helpers: value parsing
@@ -298,12 +339,20 @@ def build_html(stats: Dict[str, int], svg_q1: Optional[str], svg_q2: Optional[st
 # -----------------------------
 
 def main() -> None:
-    print("[INFO] Reading Excel...", file=sys.stderr)
+    print("[INFO] Reading Excel (raw preview)...", file=sys.stderr)
     try:
-        df = pd.read_excel(DATA_FILE, engine="openpyxl")
+        df_raw = pd.read_excel(DATA_FILE, header=None, engine="openpyxl")
     except Exception as e:
         print(f"[ERROR] Failed to read {DATA_FILE}: {e}", file=sys.stderr)
         sys.exit(1)
+
+    hdr = detect_header_row_from_raw(df_raw, search_rows=20)
+    if hdr is not None:
+        print(f"[INFO] Detected header row at index {hdr} (0-based); re-reading with header={hdr}")
+        df = pd.read_excel(DATA_FILE, header=hdr, engine="openpyxl")
+    else:
+        print("[INFO] No header row detected in first 20 rows; using default header=0")
+        df = pd.read_excel(DATA_FILE, engine="openpyxl")
 
     read_rows = int(len(df))
     print(f"[INFO] Read rows: {read_rows}")
