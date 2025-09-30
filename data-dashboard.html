@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>数据看板 - Agentic AI Performance</title>
+<style>
+    body { font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif; margin: 0; background: #f7f7f9; color: #222; }
+    .container { max-width: 980px; margin: 0 auto; padding: 16px; }
+    header.card { padding: 16px 20px; background: #fff; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); margin-bottom: 16px; }
+    .flex { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 720px) { .flex { grid-template-columns: 1fr; } }
+    .card { padding: 16px 20px; background: #fff; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); margin-bottom: 16px; }
+    .kpi { text-align: center; }
+    .kpi h3 { margin: 6px 0 0; font-size: 22px; }
+    .kpi p { margin: 0; color: #666; font-size: 13px; }
+    h1 { margin: 0 0 4px; font-size: 24px; }
+    h2 { margin: 0 0 6px; font-size: 18px; }
+    .sub { margin: 0 0 8px; color: #666; font-size: 13px; }
+    .chart svg { width: 100%; height: auto; }
+    .placeholder { height: 120px; display: flex; align-items: center; justify-content: center; color: #999; background: #fafafa; border: 1px dashed #ddd; border-radius: 8px; }
+    footer { color: #666; font-size: 12px; margin: 16px 0; }
+    </style>
+</head>
+<body>
+  <div class="container">
+    <header class="card">
+      <h1>Agentic AI 数据看板</h1>
+      <div class="sub">来源文件：first-80-rows-agentic_ai_performance_dataset_20250622.xlsx · 生成时间：2025-10-01 00:02:32</div>
+      <div class="sub">说明：本页为静态 HTML，图表以内嵌 SVG 呈现，移动端友好。</div>
+    </header>
+
+    <div class="flex">
+      <section class="card kpi">
+        <p>读取行数</p>
+        <h3>81</h3>
+      </section>
+      <section class="card kpi">
+        <p>有效处理行数</p>
+        <h3>0</h3>
+      </section>
+    </div>
+
+    
+        <section class="card">
+          <h2>智能体类型的多模态支持占比 Top 3</h2>
+          <p class="sub">组内占比 = 支持多模态 / 该类型总数；柱上标注样本量 n</p>
+          <div class="chart"><div class="placeholder">数据不足</div></div>
+        </section>
+        
+    
+        <section class="card">
+          <h2>大模型架构的多模态支持占比 Top 3</h2>
+          <p class="sub">组内占比 = 支持多模态 / 该架构总数；柱上标注样本量 n</p>
+          <div class="chart"><div class="placeholder">数据不足</div></div>
+        </section>
+        
+    
+        <section class="card">
+          <h2>任务类别的“bias detection”中位数 Top 3</h2>
+          <p class="sub">按 task_category 分组，计算 bias detection 的中位数</p>
+          <div class="chart"><div class="placeholder">数据不足</div></div>
+        </section>
+        
+
+    <footer>
+      <div>方法：
+        多模态占比的分子为组内 multimodal=True 数，分母为该组中 multimodal 可解析为布尔的行数；
+        缺失值已剔除。并列按组名升序打破。若数据不足则显示占位卡片。
+      </div>
+      <div>© 2025 Data Dashboard</div>
+    </footer>
+  </div>
+</body>
+</html>
