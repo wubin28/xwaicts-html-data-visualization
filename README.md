@@ -39,7 +39,7 @@ This project processes and visualizes data from the "Agentic AI Performance Data
 
 - Python 3.12
 - Virtual environment (pre-configured)
-- Excel dataset: `@first-80-rows-agentic_ai_performance_dataset_20250622.xlsx`
+- Excel dataset: `first-80-rows-agentic_ai_performance_dataset_20250622.xlsx` (80 records)
 
 ## Installation & Setup
 
@@ -52,8 +52,9 @@ This project processes and visualizes data from the "Agentic AI Performance Data
    venv\Scripts\activate
    ```
 
-2. **Verify installed packages:**
+2. **Verify installed packages and Python version:**
    ```bash
+   python --version
    pip list
    ```
 
@@ -78,9 +79,9 @@ The project includes these pre-installed packages:
 2. **Open the generated dashboard:**
    ```bash
    # Open data-dashboard.html in your browser
-   open data-dashboard.html  # macOS
-   start data-dashboard.html  # Windows
-   xdg-open data-dashboard.html  # Linux
+   open data-dashboard.html      # macOS
+   start data-dashboard.html     # Windows
+   xdg-open data-dashboard.html  # Linux/WSL
    ```
 
 ## Output Files
@@ -90,26 +91,42 @@ The project includes these pre-installed packages:
 
 ## Development Workflow
 
-This project follows the **Riper-5 Protocol** with five distinct development phases:
+This project follows the **ICM-RIPER-5 Protocol** with five distinct development phases:
 
-1. **RESEARCH** - Information gathering and data exploration
-2. **INNOVATE** - Brainstorming visualization approaches
-3. **PLAN** - Detailed technical specifications
-4. **EXECUTE** - Implementation following the approved plan
-5. **REVIEW** - Validation and quality assurance
+1. **RESEARCH** - Information gathering and file reading only
+2. **INNOVATE** - Brainstorming approaches without implementation
+3. **PLAN** - Create comprehensive technical specifications and save to timestamped todo file
+4. **EXECUTE** - Follow the plan exactly with no creative decisions
+5. **REVIEW** - Validate implementation against the original plan
+
+**Critical**: AI assistants must declare their current mode with `[MODE: MODE_NAME]` at the start of each response.
+
+### Iterative Context Management (ICM)
+
+The `icm-template.md` file serves as an Iterative Context Management template with prompt instructions. When first using this template:
+
+1. Copy the `icm-template.md` file
+2. Rename it to `icm-yyyy-mm-dd--hh-mm.md` (using current timestamp)
+3. Modify the content according to the specific requirements of the current iteration
+
+This approach ensures each development iteration has customized context and prompts while maintaining consistency with the overall project structure.
 
 ## Project Structure
 
 ```
-├── venv/                          # Python virtual environment
-├── requirements.md                # Project requirements (Chinese)
-├── prompts.md                     # Development instructions
-├── rules-riper5.md               # Development protocol
-├── todo.md                       # Task tracking
-├── bubbles.md                    # Progress logging
-├── CLAUDE.md                     # AI assistant guidance
-├── read-excel-data.py            # Data processing script (generated)
-└── data-dashboard.html           # Visualization dashboard (generated)
+├── venv/                                                    # Python virtual environment
+├── icm-requirements.md                                      # Project requirements (Chinese)
+├── icm-riper-5.md                                          # ICM-RIPER-5 development protocol
+├── prompts-final-result.md                                 # Generating the code for the final result without using RIPER-5
+├── icm-template.md                                         # Iterative Context Management template prompts
+├── first-80-rows-agentic_ai_performance_dataset_20250622.xlsx # Excel dataset (80 records)
+├── todo.md                                                 # Task tracking
+├── bubbles.md                                              # Progress logging
+├── bubbling-logs.md                                        # Development documentation
+├── CLAUDE.md                                               # AI assistant guidance
+├── README.md                                               # Project documentation
+├── read-excel-data.py                                      # Data processing script (generated)
+└── data-dashboard.html                                     # Visualization dashboard (generated)
 ```
 
 ## Data Analysis Focus
@@ -133,9 +150,12 @@ The dashboard provides insights into:
 When working on this project:
 
 1. Always use the existing `venv` virtual environment
-2. Follow the Riper-5 development protocol
-3. Ensure all outputs are self-contained HTML files
-4. Maintain mobile responsiveness and light color themes
+2. Follow the ICM-RIPER-5 development protocol strictly
+3. Always declare your current mode with `[MODE: MODE_NAME]`
+4. Generated files must be named exactly `read-excel-data.py` and `data-dashboard.html`
+5. Ensure all outputs are self-contained HTML files with no external dependencies
+6. Maintain mobile responsiveness and light color themes
+7. Code comments should be in English, even though requirements are in Chinese
 
 ## Security
 

@@ -25,9 +25,10 @@ Key packages available in the virtual environment:
 ## Project Structure
 
 ### Core Files
-- `requirements.md` - Project requirements (in Chinese)
-- `prompts.md` - Instructions following Riper-5 workflow
-- `rules-riper5.md` - Strict operational protocol with 5 modes (RESEARCH, INNOVATE, PLAN, EXECUTE, REVIEW)
+- `icm-requirements.md` - Project requirements (in Chinese)
+- `icm-riper-5.md` - Strict operational protocol with 5 modes (RESEARCH, INNOVATE, PLAN, EXECUTE, REVIEW)
+- `prompts-final-result.md` - Final workflow instructions
+- `first-80-rows-agentic_ai_performance_dataset_20250622.xlsx` - Excel dataset (80 records)
 
 ### Workflow Management Files
 - `todo.md` - Task tracking and implementation checklists
@@ -53,10 +54,12 @@ This project follows a strict 5-mode development protocol:
 
 ### Key Requirements
 - **Virtual Environment**: Must use the existing `venv` directory
-- **Data Source**: Excel file `@first-80-rows-agentic_ai_performance_dataset_20250622.xlsx`
+- **Data Source**: Excel file `first-80-rows-agentic_ai_performance_dataset_20250622.xlsx` (80 records)
 - **Output Format**: Static HTML with embedded visualizations (no external dependencies)
-- **Design**: Light color scheme, mobile-responsive
+- **Design**: Light color scheme, mobile-responsive, works on mobile browsers
 - **Language**: Requirements are in Chinese, but code should have English comments
+- **File Naming**: Generated Python script must be named exactly `read-excel-data.py`
+- **Dashboard Naming**: Generated HTML file must be named exactly `data-dashboard.html`
 
 ### Security Notes
 - Handle sudo password requests by pausing for user input
@@ -79,9 +82,44 @@ source venv/bin/activate
 # Install additional packages (if needed)
 pip install package_name
 
-# Run Python scripts
+# Run the data processing script
 python read-excel-data.py
+
+# Open generated dashboard in browser
+# Linux/WSL
+xdg-open data-dashboard.html
+# macOS
+open data-dashboard.html
+# Windows
+start data-dashboard.html
+
+# Check Python version
+python --version
+
+# List installed packages
+pip list
 
 # Deactivate virtual environment
 deactivate
 ```
+
+## ICM-RIPER-5 Protocol Details
+
+The project strictly follows the ICM-RIPER-5 methodology defined in `icm-riper-5.md`:
+
+1. **RESEARCH** - Information gathering and file reading only
+2. **INNOVATE** - Brainstorming approaches without implementation
+3. **PLAN** - Create comprehensive technical specifications and save to timestamped todo file
+4. **EXECUTE** - Follow the plan exactly with no creative decisions
+5. **REVIEW** - Validate implementation against the original plan
+
+**Critical**: Always declare your current mode with `[MODE: MODE_NAME]` at the start of each response.
+
+## Evaluation Context
+
+This is part of an AI coding tools performance evaluation. Each git branch represents a single evaluation session with metadata in the branch name indicating:
+- Timestamp of evaluation
+- Result satisfaction level
+- AI tool used
+- LLM model configuration
+- Platform details
