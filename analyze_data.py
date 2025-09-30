@@ -97,8 +97,8 @@ def analyze_question3(df):
 
 def create_chart1(data):
     """生成问题1的水平柱状图"""
-    # 设置中文字体
-    plt.rcParams['font.sans-serif'] = ['DejaVu Sans', 'SimHei', 'Arial Unicode MS']
+    # 设置字体为英文，避免中文显示问题
+    plt.rcParams['font.family'] = 'DejaVu Sans'
     plt.rcParams['axes.unicode_minus'] = False
 
     # 创建图表
@@ -111,10 +111,10 @@ def create_chart1(data):
     # 创建水平柱状图
     bars = ax.barh(agent_types, percentages, color=['#2196F3', '#1976D2', '#0D47A1'])
 
-    # 设置标题和标签
-    ax.set_title('支持多模态处理的智能体类型占比前三', fontsize=16, fontweight='bold', pad=20)
-    ax.set_xlabel('多模态占比 (%)', fontsize=12)
-    ax.set_ylabel('智能体类型', fontsize=12)
+    # 设置标题和标签（使用英文避免字体问题）
+    ax.set_title('Top 3 Agent Types by Multimodal Capability Ratio', fontsize=16, fontweight='bold', pad=20)
+    ax.set_xlabel('Multimodal Capability Ratio (%)', fontsize=12)
+    ax.set_ylabel('Agent Type', fontsize=12)
 
     # 在柱子上添加数值标签
     for i, (bar, percentage) in enumerate(zip(bars, percentages)):
@@ -140,10 +140,10 @@ def create_chart2(data):
     # 创建垂直柱状图
     bars = ax.bar(model_archs, percentages, color=['#4CAF50', '#388E3C', '#2E7D32'])
 
-    # 设置标题和标签
-    ax.set_title('支持多模态处理的大模型架构占比前三', fontsize=16, fontweight='bold', pad=20)
-    ax.set_xlabel('大模型架构', fontsize=12)
-    ax.set_ylabel('多模态占比 (%)', fontsize=12)
+    # 设置标题和标签（使用英文避免字体问题）
+    ax.set_title('Top 3 Model Architectures by Multimodal Capability Ratio', fontsize=16, fontweight='bold', pad=20)
+    ax.set_xlabel('Model Architecture', fontsize=12)
+    ax.set_ylabel('Multimodal Capability Ratio (%)', fontsize=12)
 
     # 在柱子上添加数值标签
     for bar, percentage in zip(bars, percentages):
@@ -172,10 +172,10 @@ def create_chart3(data):
     # 创建垂直柱状图
     bars = ax.bar(task_categories, medians, color=['#FF9800', '#F57C00', '#E65100'])
 
-    # 设置标题和标签
-    ax.set_title('各任务类别bias_detection中位数前三', fontsize=16, fontweight='bold', pad=20)
-    ax.set_xlabel('任务类别', fontsize=12)
-    ax.set_ylabel('bias_detection中位数', fontsize=12)
+    # 设置标题和标签（使用英文避免字体问题）
+    ax.set_title('Top 3 Task Categories by Bias Detection Median Score', fontsize=16, fontweight='bold', pad=20)
+    ax.set_xlabel('Task Category', fontsize=12)
+    ax.set_ylabel('Bias Detection Median Score', fontsize=12)
 
     # 在柱子上添加数值标签
     for bar, median in zip(bars, medians):
@@ -391,7 +391,8 @@ def generate_html(chart1_b64, chart2_b64, chart3_b64, stats):
         <div class="section">
             <div class="section-header">
                 <div class="section-title">问题1: 支持多模态处理的智能体类型占比前三</div>
-                <div class="section-description">分析各种智能体类型中支持多模态处理的占比情况</div>
+                <div class="section-description">分析各种智能体类型中支持多模态处理的占比情况<br>
+                <small>Question 1: Top 3 Agent Types by Multimodal Capability Ratio</small></div>
             </div>
             <div class="chart-container">
                 <img src="data:image/png;base64,{chart1_b64}" alt="智能体类型多模态占比图" class="chart-image">
@@ -401,7 +402,8 @@ def generate_html(chart1_b64, chart2_b64, chart3_b64, stats):
         <div class="section">
             <div class="section-header">
                 <div class="section-title">问题2: 支持多模态处理的大模型架构占比前三</div>
-                <div class="section-description">分析各种大模型架构中支持多模态处理的占比情况</div>
+                <div class="section-description">分析各种大模型架构中支持多模态处理的占比情况<br>
+                <small>Question 2: Top 3 Model Architectures by Multimodal Capability Ratio</small></div>
             </div>
             <div class="chart-container">
                 <img src="data:image/png;base64,{chart2_b64}" alt="大模型架构多模态占比图" class="chart-image">
@@ -411,7 +413,8 @@ def generate_html(chart1_b64, chart2_b64, chart3_b64, stats):
         <div class="section">
             <div class="section-header">
                 <div class="section-title">问题3: 各任务类别bias_detection中位数前三</div>
-                <div class="section-description">分析各种任务类别的公正性检测得分中位数排名</div>
+                <div class="section-description">分析各种任务类别的公正性检测得分中位数排名<br>
+                <small>Question 3: Top 3 Task Categories by Bias Detection Median Score</small></div>
             </div>
             <div class="chart-container">
                 <img src="data:image/png;base64,{chart3_b64}" alt="任务类别bias_detection中位数图" class="chart-image">
