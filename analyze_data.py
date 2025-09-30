@@ -22,6 +22,14 @@ import pandas as pd
 import numpy as np
 import matplotlib
 matplotlib.use("Agg")  # Ensure headless backend
+# Ensure SVG text remains text (not paths) so browsers can use system CJK fonts
+matplotlib.rcParams["svg.fonttype"] = "none"
+# Prefer a CJK-capable sans-serif stack; browser will pick available fonts
+matplotlib.rcParams["font.family"] = [
+    "Noto Sans CJK SC", "Noto Sans CJK", "Microsoft YaHei", "PingFang SC",
+    "Hiragino Sans GB", "WenQuanYi Micro Hei", "SimHei", "Arial Unicode MS",
+    "DejaVu Sans", "sans-serif"
+]
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -246,6 +254,11 @@ def make_hbar_svg(labels: List[str], values: List[float], annotations: List[str]
     plt.close(fig)
     svg = buf.getvalue()
     buf.close()
+    # Post-process font-family in SVG to ensure CJK-capable fallback fonts in browsers
+    fallback_stack = "'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Hiragino Sans GB','WenQuanYi Micro Hei','SimHei','Arial Unicode MS',sans-serif"
+    svg = svg.replace("font-family:DejaVu Sans", f"font-family:{fallback_stack}")
+    svg = svg.replace("font-family: DejaVu Sans", f"font-family: {fallback_stack}")
+    svg = svg.replace("font-family=\"DejaVu Sans\"", f"font-family=\"{fallback_stack}\"")
     return svg
 
 
@@ -284,6 +297,8 @@ def build_html(stats: Dict[str, int], svg_q1: Optional[str], svg_q2: Optional[st
     h2 { margin: 0 0 6px; font-size: 18px; }
     .sub { margin: 0 0 8px; color: #666; font-size: 13px; }
     .chart svg { width: 100%; height: auto; }
+    /* Force CJK-capable fonts inside embedded SVG text */
+    .chart svg text { font-family: 'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Hiragino Sans GB','WenQuanYi Micro Hei','SimHei','Arial Unicode MS', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
     .placeholder { height: 120px; display: flex; align-items: center; justify-content: center; color: #999; background: #fafafa; border: 1px dashed #ddd; border-radius: 8px; }
     footer { color: #666; font-size: 12px; margin: 16px 0; }
     """
