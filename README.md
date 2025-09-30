@@ -1,6 +1,6 @@
 # Xiao Wu AI Coding Tools Showdown by Generating HTML Data Dashboard
 
-A Python-based project for analyzing and visualizing AI agent performance metrics from Excel datasets, generating interactive HTML dashboards.
+A comparison of AI coding tools through a Python project that analyzes and visualizes AI agent performance metrics from Excel data, creates interactive HTML dashboards, and utilizes the ICMwRIPER-5 methodology.
 
 ## Project Purpose
 
@@ -12,12 +12,36 @@ Each Git branch represents a single evaluation session, with branch names contai
 
 - **Timestamp**: Evaluation started on September 28, 2025, at 20:09
 - **Result**: "satisfied" - indicating satisfactory performance
-- **AI CLI Tool**: CodeBuddy Code IDE
+- **AI CLI Tool**: CodeBuddy Code CLI
 - **Model**: Default configuration with DeepSeek v3.1 large language model
-- **AI IDE**: CodeBuddyCN (China domestic version) built-in terminal
+- **AI IDE**: CodeBuddyCN (China domestic version)
 - **Platform**: Windows 11 WSL2 Ubuntu 24.04
 
 This systematic naming convention enables tracking and comparison of different AI tool combinations across various environments and configurations.
+
+## ICMwRIPER-5 (Iterative Context Management with RIPER-5) Method
+
+This project follows the **ICMwRIPER-5 Method** with six distinct development phases:
+
+1. **Iterative Context Management** - Iteratively review and update the story description file `icm-story-yyyy-mm-dd--hh-mm.md` and starting prompt file `icm-bubble-yyyy-mm-dd--hh-mm.md` based on the current iteration story. This ensures proper alignment of AI context before entering the RIPER-5 iteration. Then send the prompts from `icm-bubble-yyyy-mm-dd--hh-mm.md` to the AI.
+2. **RESEARCH** - Information gathering and file reading only
+3. **INNOVATE** - Brainstorming approaches without implementation
+4. **PLAN** - Create comprehensive technical specifications and save to timestamped todo file
+5. **EXECUTE** - Follow the plan exactly with no creative decisions
+6. **REVIEW** - Validate implementation against the original plan and go back to phase 1
+
+**Critical**: AI assistants must declare their current mode with `[MODE: MODE_NAME]` at the start of each response.
+
+### Getting Started with ICMwRIPER-5 Method
+
+The `icm-bubble-template.md` and `icm-story-template.md` files serve as an Iterative Context Management template with prompt instructions. When first using this template:
+
+1. Copy the `icm-bubble-template.md` and `icm-story-template.md` file
+2. Rename them to `icm-bubble-yyyy-mm-dd--hh-mm.md` and `icm-story-yyyy-mm-dd--hh-mm.md` (using current timestamp)
+3. Modify the content according to the specific story of the current iteration
+4. Send the prompts from `icm-bubble-yyyy-mm-dd--hh-mm.md` to the AI to start a new iteration
+
+This approach ensures each development iteration has customized context and prompts while maintaining consistency with the overall project structure.
 
 ## Project Description
 
@@ -45,11 +69,17 @@ This project processes and visualizes data from the "Agentic AI Performance Data
 
 1. **Activate the virtual environment:**
    ```bash
+
    # Linux/macOS
+   python3 -m venv venv
    source venv/bin/activate
 
    # Windows
+   python -m venv venv
    venv\Scripts\activate
+
+   # exit venv
+   deactivate
    ```
 
 2. **Verify installed packages and Python version:**
@@ -69,11 +99,12 @@ The project includes these pre-installed packages:
 - **plotly** (6.3.0) - Interactive plotting
 - **numpy** (2.3.3) - Numerical computing
 
-## Usage
+## Checking the data analysis result
 
 1. **Run the data analysis script:**
    ```bash
-   python read-excel-data.py
+   python analyze_data.py # Windows
+   python3 analyze_data.py # macOS/Linux
    ```
 
 2. **Open the generated dashboard:**
@@ -86,47 +117,21 @@ The project includes these pre-installed packages:
 
 ## Output Files
 
-- `read-excel-data.py` - Python script for data processing and analysis
+- `analyze_data.py` - Python script for data processing and analysis
 - `data-dashboard.html` - Interactive HTML dashboard with visualizations
-
-## Development Workflow
-
-This project follows the **ICM-RIPER-5 Protocol** with six distinct development phases:
-
-1. **Iterative Context Management** - Regularly review and update the icm-story-yyyy-mm-dd--hh-mm.md and icm-yyyy-mm-dd--hh-mm.md files based on current iteration story to properly align AI context and then enter the RIPER-5 iteration by sending the prompts in the file icm-yyyy-mm-dd--hh-mm.md to AI
-2. **RESEARCH** - Information gathering and file reading only
-3. **INNOVATE** - Brainstorming approaches without implementation
-4. **PLAN** - Create comprehensive technical specifications and save to timestamped todo file
-5. **EXECUTE** - Follow the plan exactly with no creative decisions
-6. **REVIEW** - Validate implementation against the original plan and go back to phase 1
-
-**Critical**: AI assistants must declare their current mode with `[MODE: MODE_NAME]` at the start of each response.
-
-### Iterative Context Management (ICM)
-
-The `icm-template.md` file serves as an Iterative Context Management template with prompt instructions. When first using this template:
-
-1. Copy the `icm-template.md` file
-2. Rename it to `icm-yyyy-mm-dd--hh-mm.md` (using current timestamp)
-3. Modify the content according to the specific story of the current iteration
-
-This approach ensures each development iteration has customized context and prompts while maintaining consistency with the overall project structure.
 
 ## Project Structure
 
 ```
-├── venv/                                                    # Python virtual environment
-├── icm-story-template.md                                      # Project story template (Chinese)
-├── icm-riper-5.md                                          # ICM-RIPER-5 development protocol
-├── prompts-final-result.md                                 # Generating the code for the final result without using RIPER-5
-├── icm-template.md                                         # Iterative Context Management template prompts
+├── venv/                                                   # Python virtual environment
+├── CLAUDE.md                                               # For Claude Code
 ├── first-80-rows-agentic_ai_performance_dataset_20250622.xlsx # Excel dataset (80 records)
-├── todo.md                                                 # Task tracking
-├── bubbles.md                                              # Progress logging
-├── bubbling-logs.md                                        # Development documentation
-├── CLAUDE.md                                               # AI assistant guidance
+├── icm-bubble-template.md                                  # Starting prompt template
+├── icm-story-template.md                                   # Project story template (Chinese)
+├── icmwriper-5.md                                          # ICMwRIPER-5 development protocol
 ├── README.md                                               # Project documentation
-├── read-excel-data.py                                      # Data processing script (generated)
+├── todo-yyyy-mm-dd--hh-mm.md                               # Task tracking
+├── analyze_data.py                                      # Data processing script (generated)
 └── data-dashboard.html                                     # Visualization dashboard (generated)
 ```
 
@@ -145,18 +150,6 @@ The dashboard provides insights into:
 - Mobile-responsive design ensures compatibility across devices
 - Light color scheme optimized for readability
 - Dataset contains 80 records of AI agent performance data
-
-## Contributing
-
-When working on this project:
-
-1. Always use the existing `venv` virtual environment
-2. Follow the ICM-RIPER-5 development protocol strictly
-3. Always declare your current mode with `[MODE: MODE_NAME]`
-4. Generated files must be named exactly `read-excel-data.py` and `data-dashboard.html`
-5. Ensure all outputs are self-contained HTML files with no external dependencies
-6. Maintain mobile responsiveness and light color themes
-7. Code comments should be in English, even though stories are in Chinese
 
 ## Security
 
