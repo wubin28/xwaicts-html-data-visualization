@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI智能体性能数据分析看板</title>
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        h1 {
+            font-size: 28px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        /* 统计摘要区域 */
+        .summary {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .summary p {
+            font-size: 16px;
+            color: #666;
+        }
+        
+        .summary strong {
+            color: #2c3e50;
+        }
+        
+        /* 图表容器样式 */
+        .charts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .chart-card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .chart-card h2 {
+            font-size: 20px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .chart-container {
+            height: 300px;
+            position: relative;
+        }
+        
+        /* 页脚样式 */
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .charts-container {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .chart-card h2 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 页面标题 -->
+        <header>
+            <h1>AI智能体性能数据分析看板</h1>
+            <p>基于Agentic AI Performance Dataset 2025的分析结果</p>
+        </header>
+        
+        <!-- 数据统计摘要 -->
+        <div class="summary">
+            <p><strong>总记录数：</strong><span id="total-records">80</span>条</p>
+            <p><strong>分析时间：</strong><span id="analysis-time">2025-09-30</span></p>
+        </div>
+        
+        <!-- 图表容器 -->
+        <div class="charts-container">
+            <!-- 图表1：支持多模态处理的智能体类型占比 -->
+            <div class="chart-card">
+                <h2>支持多模态处理的智能体类型占比前三</h2>
+                <div class="chart-container">
+                    <canvas id="agentTypeChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- 图表2：支持多模态处理的大模型架构占比 -->
+            <div class="chart-card">
+                <h2>支持多模态处理的大模型架构占比前三</h2>
+                <div class="chart-container">
+                    <canvas id="modelArchChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- 图表3：任务类别公正性中位数 -->
+            <div class="chart-card">
+                <h2>任务类别公正性中位数前三</h2>
+                <div class="chart-container">
+                    <canvas id="taskFairnessChart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 页脚 -->
+        <footer>
+            <p>数据来源：Agentic AI Performance Dataset 2025 | 分析工具：Python & HTML</p>
+        </footer>
+    </div>
+    
+    <!-- Chart.js库 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- 数据可视化脚本 -->
+    <script>
+        // 图表数据
+        const chartData = {"agent_type": {"labels": ["Research Assistant", "Document Processor", "Sales Assistant"], "values": [60.0, 33.33333333333333, 28.57142857142857]}, "model_architecture": {"labels": ["GPT-4o", "CodeT5+", "Transformer-XL"], "values": [37.5, 33.33333333333333, 20.0]}, "task_fairness": {"labels": ["Communication", "Research & Summarization", "Decision Making"], "values": [0.8214, 0.78535, 0.7816]}, "total_records": 80};
+        
+        // 设置图表颜色主题
+        const colors = {
+            background: [
+                'rgba(255, 99, 132, 0.7)',
+                'rgba(54, 162, 235, 0.7)',
+                'rgba(255, 206, 86, 0.7)',
+                'rgba(75, 192, 192, 0.7)',
+                'rgba(153, 102, 255, 0.7)'
+            ],
+            border: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)'
+            ]
+        };
+        
+        // 创建智能体类型占比图表
+        const agentTypeCtx = document.getElementById('agentTypeChart').getContext('2d');
+        new Chart(agentTypeCtx, {
+            type: 'doughnut',
+            data: {
+                labels: chartData.agent_type.labels,
+                datasets: [{
+                    data: chartData.agent_type.values,
+                    backgroundColor: colors.background,
+                    borderColor: colors.border,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `${context.label}: ${context.parsed.toFixed(2)}%`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // 创建模型架构占比图表
+        const modelArchCtx = document.getElementById('modelArchChart').getContext('2d');
+        new Chart(modelArchCtx, {
+            type: 'doughnut',
+            data: {
+                labels: chartData.model_architecture.labels,
+                datasets: [{
+                    data: chartData.model_architecture.values,
+                    backgroundColor: colors.background,
+                    borderColor: colors.border,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `${context.label}: ${context.parsed.toFixed(2)}%`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // 创建任务公正性中位数图表
+        const taskFairnessCtx = document.getElementById('taskFairnessChart').getContext('2d');
+        new Chart(taskFairnessCtx, {
+            type: 'bar',
+            data: {
+                labels: chartData.task_fairness.labels,
+                datasets: [{
+                    label: '公正性中位数',
+                    data: chartData.task_fairness.values,
+                    backgroundColor: colors.background,
+                    borderColor: colors.border,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 1,
+                        ticks: {
+                            callback: function(value) {
+                                return value.toFixed(2);
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `公正性中位数: ${context.parsed.y.toFixed(2)}`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // 设置当前日期
+        document.getElementById('analysis-time').textContent = new Date().toISOString().split('T')[0];
+    </script>
+</body>
+</html>
+    
