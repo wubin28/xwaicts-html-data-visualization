@@ -93,7 +93,7 @@ The project includes these pre-installed packages:
 
 This project follows the **ICM-RIPER-5 Protocol** with six distinct development phases:
 
-1. **Iterative Context Management** - Regularly review and update the icm-requirements-yyyy-mm-dd--hh-mm.md and icm-yyyy-mm-dd--hh-mm.md files based on current iteration requirements to properly align AI context and then enter the RIPER-5 iteration by sending the prompts in the file icm-yyyy-mm-dd--hh-mm.md to AI
+1. **Iterative Context Management** - Regularly review and update the icm-story-yyyy-mm-dd--hh-mm.md and icm-yyyy-mm-dd--hh-mm.md files based on current iteration story to properly align AI context and then enter the RIPER-5 iteration by sending the prompts in the file icm-yyyy-mm-dd--hh-mm.md to AI
 2. **RESEARCH** - Information gathering and file reading only
 3. **INNOVATE** - Brainstorming approaches without implementation
 4. **PLAN** - Create comprehensive technical specifications and save to timestamped todo file
@@ -108,7 +108,7 @@ The `icm-template.md` file serves as an Iterative Context Management template wi
 
 1. Copy the `icm-template.md` file
 2. Rename it to `icm-yyyy-mm-dd--hh-mm.md` (using current timestamp)
-3. Modify the content according to the specific requirements of the current iteration
+3. Modify the content according to the specific story of the current iteration
 
 This approach ensures each development iteration has customized context and prompts while maintaining consistency with the overall project structure.
 
@@ -116,7 +116,7 @@ This approach ensures each development iteration has customized context and prom
 
 ```
 ├── venv/                                                    # Python virtual environment
-├── icm-requirements.md                                      # Project requirements (Chinese)
+├── icm-story-template.md                                      # Project story template (Chinese)
 ├── icm-riper-5.md                                          # ICM-RIPER-5 development protocol
 ├── prompts-final-result.md                                 # Generating the code for the final result without using RIPER-5
 ├── icm-template.md                                         # Iterative Context Management template prompts
@@ -156,7 +156,7 @@ When working on this project:
 4. Generated files must be named exactly `read-excel-data.py` and `data-dashboard.html`
 5. Ensure all outputs are self-contained HTML files with no external dependencies
 6. Maintain mobile responsiveness and light color themes
-7. Code comments should be in English, even though requirements are in Chinese
+7. Code comments should be in English, even though stories are in Chinese
 
 ## Security
 
