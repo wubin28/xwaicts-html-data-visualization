@@ -91,13 +91,14 @@ The project includes these pre-installed packages:
 
 ## Development Workflow
 
-This project follows the **ICM-RIPER-5 Protocol** with five distinct development phases:
+This project follows the **ICM-RIPER-5 Protocol** with six distinct development phases:
 
-1. **RESEARCH** - Information gathering and file reading only
-2. **INNOVATE** - Brainstorming approaches without implementation
-3. **PLAN** - Create comprehensive technical specifications and save to timestamped todo file
-4. **EXECUTE** - Follow the plan exactly with no creative decisions
-5. **REVIEW** - Validate implementation against the original plan
+1. **Iterative Context Management** - Regularly review and update the icm-requirements-yyyy-mm-dd--hh-mm.md and icm-yyyy-mm-dd--hh-mm.md files based on current iteration requirements to properly align AI context and then enter the RIPER-5 iteration by sending the prompts in the file icm-yyyy-mm-dd--hh-mm.md to AI
+2. **RESEARCH** - Information gathering and file reading only
+3. **INNOVATE** - Brainstorming approaches without implementation
+4. **PLAN** - Create comprehensive technical specifications and save to timestamped todo file
+5. **EXECUTE** - Follow the plan exactly with no creative decisions
+6. **REVIEW** - Validate implementation against the original plan and go back to phase 1
 
 **Critical**: AI assistants must declare their current mode with `[MODE: MODE_NAME]` at the start of each response.
 
