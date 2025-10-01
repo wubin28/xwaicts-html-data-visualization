@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI智能体性能数据看板</title>
+    
+    <!-- Chart.js CDN引入 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- CSS样式 -->
+    <style>
+        /* CSS变量定义 - 浅色调配色方案 */
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #7bb3f0;
+            --background-color: #f8fafc;
+            --card-background: #ffffff;
+            --text-primary: #2c3e50;
+            --text-secondary: #5a6c7d;
+            --border-color: #e1e8ed;
+            --success-color: #52c41a;
+            --info-color: #1890ff;
+            --warning-color: #faad14;
+        }
+        
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        
+        /* Flexbox布局 - 页面整体结构 */
+        .dashboard-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .dashboard-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .dataset-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        
+        .dataset-info p {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+        }
+        
+        /* 主要内容区域 - Flexbox布局 */
+        .dashboard-main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .analysis-section {
+            background: var(--card-background);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+        }
+        
+        .analysis-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        /* 内容包装器 - Flexbox响应式布局 */
+        .content-wrapper {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+        
+        /* 图表容器样式 */
+        .chart-container {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            background: #fafbfc;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            height: 400px; /* 添加固定高度确保图表响应式 */
+        }
+        
+        .chart-container canvas {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* 表格容器样式 */
+        .table-container {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--card-background);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        th {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 500;
+        }
+        
+        td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        /* 数字样式 */
+        .number {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        /* 移动端适配CSS规则 */
+        @media (max-width: 768px) {
+            .dashboard-header h1 {
+                font-size: 2rem;
+            }
+            
+            .dataset-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .dashboard-main {
+                padding: 0 0.5rem;
+                margin: 1rem auto;
+            }
+            
+            .analysis-section {
+                padding: 1rem;
+            }
+            
+            .analysis-section h2 {
+                font-size: 1.25rem;
+            }
+            
+            /* 移动端垂直布局 */
+            .content-wrapper {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .chart-container,
+            .table-container {
+                min-width: 100%;
+            }
+            
+            /* 表格在移动端的优化 */
+            table {
+                font-size: 0.9rem;
+            }
+            
+            th, td {
+                padding: 0.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .dashboard-header {
+                padding: 1.5rem 1rem;
+            }
+            
+            .dashboard-header h1 {
+                font-size: 1.75rem;
+            }
+            
+            table {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+    
+</head>
+<body>
+    
+    <!-- 页面标题和数据集信息区域 -->
+    <header class="dashboard-header">
+        <h1>AI智能体性能数据分析看板</h1>
+        <div class="dataset-info">
+            <p><strong>数据集：</strong>Agentic AI Performance Dataset 2025</p>
+            <p><strong>处理记录数：</strong><span id="recordCount">80</span> 条</p>
+            <p><strong>分析时间：</strong><span id="analysisTime">2025-10-01 21:18:01</span></p>
+        </div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <main class="dashboard-main">
+        
+        <!-- 问题1：智能体类型多模态占比 -->
+        <section class="analysis-section">
+            <h2>问题1：支持多模态处理占比排名前3的智能体类型</h2>
+            <div class="content-wrapper">
+                <div class="chart-container">
+                    <canvas id="chart1"></canvas>
+                </div>
+                <div class="table-container">
+                    <table id="table1">
+                        <thead>
+                            <tr>
+                                <th>排名</th>
+                                <th>智能体类型</th>
+                                <th>多模态占比</th>
+                                <th>支持数/总数</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td>Research Assistant</td><td class="number">60.0%</td><td>3/5</td></tr>
+                            <tr><td>2</td><td>Document Processor</td><td class="number">33.33%</td><td>2/6</td></tr>
+                            <tr><td>3</td><td>Sales Assistant</td><td class="number">28.57%</td><td>2/7</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 问题2：大模型架构多模态占比 -->
+        <section class="analysis-section">
+            <h2>问题2：支持多模态处理占比排名前3的大模型架构</h2>
+            <div class="content-wrapper">
+                <div class="chart-container">
+                    <canvas id="chart2"></canvas>
+                </div>
+                <div class="table-container">
+                    <table id="table2">
+                        <thead>
+                            <tr>
+                                <th>排名</th>
+                                <th>大模型架构</th>
+                                <th>多模态占比</th>
+                                <th>支持数/总数</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td>GPT-4o</td><td class="number">37.5%</td><td>3/8</td></tr>
+                            <tr><td>2</td><td>CodeT5+</td><td class="number">33.33%</td><td>3/9</td></tr>
+                            <tr><td>3</td><td>Transformer-XL</td><td class="number">20.0%</td><td>2/10</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 问题3：任务类别偏见检测中位数 -->
+        <section class="analysis-section">
+            <h2>问题3：偏见检测分数中位数排名前3的任务类别</h2>
+            <div class="content-wrapper">
+                <div class="chart-container">
+                    <canvas id="chart3"></canvas>
+                </div>
+                <div class="table-container">
+                    <table id="table3">
+                        <thead>
+                            <tr>
+                                <th>排名</th>
+                                <th>任务类别</th>
+                                <th>偏见检测中位数</th>
+                                <th>样本数</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td>Communication</td><td class="number">0.82</td><td>5</td></tr>
+                            <tr><td>2</td><td>Research & Summarization</td><td class="number">0.79</td><td>4</td></tr>
+                            <tr><td>3</td><td>Text Processing</td><td class="number">0.78</td><td>12</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- JavaScript代码 -->
+    <script>
+        // 内嵌数据 - 避免跨域问题
+        const dashboardData = {
+            "dataset_info": {
+                "total_records": 80,
+                "analysis_date": "2025-10-01 21:18:01",
+                "file_name": "first-80-rows-agentic_ai_performance_dataset_20250622.xlsx"
+            },
+            "question1": {
+                "title": "支持多模态处理占比排名前3的智能体类型",
+                "description": "各智能体类型中multimodal_capability为True的占比",
+                "top3_results": [
+                    {
+                        "rank": 1,
+                        "agent_type": "Research Assistant",
+                        "percentage": 60.0,
+                        "multimodal_count": 3,
+                        "total_count": 5
+                    },
+                    {
+                        "rank": 2,
+                        "agent_type": "Document Processor",
+                        "percentage": 33.33,
+                        "multimodal_count": 2,
+                        "total_count": 6
+                    },
+                    {
+                        "rank": 3,
+                        "agent_type": "Sales Assistant",
+                        "percentage": 28.57,
+                        "multimodal_count": 2,
+                        "total_count": 7
+                    }
+                ]
+            },
+            "question2": {
+                "title": "支持多模态处理占比排名前3的大模型架构",
+                "description": "各大模型架构中multimodal_capability为True的占比",
+                "top3_results": [
+                    {
+                        "rank": 1,
+                        "model_architecture": "GPT-4o",
+                        "percentage": 37.5,
+                        "multimodal_count": 3,
+                        "total_count": 8
+                    },
+                    {
+                        "rank": 2,
+                        "model_architecture": "CodeT5+",
+                        "percentage": 33.33,
+                        "multimodal_count": 3,
+                        "total_count": 9
+                    },
+                    {
+                        "rank": 3,
+                        "model_architecture": "Transformer-XL",
+                        "percentage": 20.0,
+                        "multimodal_count": 2,
+                        "total_count": 10
+                    }
+                ]
+            },
+            "question3": {
+                "title": "偏见检测分数中位数排名前3的任务类别",
+                "description": "各任务类别的bias_detection_score中位数",
+                "top3_results": [
+                    {
+                        "rank": 1,
+                        "task_category": "Communication",
+                        "median_score": 0.82,
+                        "sample_count": 5
+                    },
+                    {
+                        "rank": 2,
+                        "task_category": "Research & Summarization",
+                        "median_score": 0.79,
+                        "sample_count": 4
+                    },
+                    {
+                        "rank": 3,
+                        "task_category": "Text Processing",
+                        "median_score": 0.78,
+                        "sample_count": 12
+                    }
+                ]
+            }
+        };
+        
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('页面加载完成，开始创建图表...');
+            
+            // 创建图表
+            createChart1(dashboardData.question1.top3_results);
+            createChart2(dashboardData.question2.top3_results);
+            createChart3(dashboardData.question3.top3_results);
+        });
+        
+        // 创建图表1：智能体类型多模态占比
+        function createChart1(data) {
+            const ctx = document.getElementById('chart1').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: data.map(item => item.agent_type),
+                    datasets: [{
+                        label: '多模态处理占比 (%)',
+                        data: data.map(item => item.percentage),
+                        backgroundColor: [
+                            'rgba(74, 144, 226, 0.8)',
+                            'rgba(123, 179, 240, 0.8)',
+                            'rgba(82, 196, 26, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(74, 144, 226, 1)',
+                            'rgba(123, 179, 240, 1)',
+                            'rgba(82, 196, 26, 1)'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '智能体类型多模态处理占比',
+                            color: '#2c3e50'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                maxRotation: 45
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // 创建图表2：大模型架构多模态占比
+        function createChart2(data) {
+            const ctx = document.getElementById('chart2').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: data.map(item => item.model_architecture),
+                    datasets: [{
+                        label: '多模态处理占比 (%)',
+                        data: data.map(item => item.percentage),
+                        backgroundColor: [
+                            'rgba(24, 144, 255, 0.8)',
+                            'rgba(250, 173, 20, 0.8)',
+                            'rgba(135, 208, 104, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(24, 144, 255, 1)',
+                            'rgba(250, 173, 20, 1)',
+                            'rgba(135, 208, 104, 1)'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '大模型架构多模态处理占比',
+                            color: '#2c3e50'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                maxRotation: 45
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // 创建图表3：任务类别偏见检测中位数
+        function createChart3(data) {
+            const ctx = document.getElementById('chart3').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: data.map(item => item.task_category),
+                    datasets: [{
+                        label: '偏见检测分数中位数',
+                        data: data.map(item => item.median_score),
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.8)',
+                            'rgba(54, 162, 235, 0.8)',
+                            'rgba(255, 206, 86, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '任务类别偏见检测分数中位数',
+                            color: '#2c3e50'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 1,
+                            ticks: {
+                                callback: function(value) {
+                                    return value.toFixed(2);
+                                }
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                maxRotation: 45
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+    
+</body>
+</html>

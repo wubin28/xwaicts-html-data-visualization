@@ -1,0 +1,85 @@
+{
+  "dataset_info": {
+    "total_records": 80,
+    "analysis_date": "2025-10-01 21:18:01",
+    "file_name": "first-80-rows-agentic_ai_performance_dataset_20250622.xlsx"
+  },
+  "question1": {
+    "title": "支持多模态处理占比排名前3的智能体类型",
+    "description": "各智能体类型中multimodal_capability为True的占比",
+    "top3_results": [
+      {
+        "rank": 1,
+        "agent_type": "Research Assistant",
+        "percentage": 60.0,
+        "multimodal_count": 3,
+        "total_count": 5
+      },
+      {
+        "rank": 2,
+        "agent_type": "Document Processor",
+        "percentage": 33.33,
+        "multimodal_count": 2,
+        "total_count": 6
+      },
+      {
+        "rank": 3,
+        "agent_type": "Sales Assistant",
+        "percentage": 28.57,
+        "multimodal_count": 2,
+        "total_count": 7
+      }
+    ]
+  },
+  "question2": {
+    "title": "支持多模态处理占比排名前3的大模型架构",
+    "description": "各大模型架构中multimodal_capability为True的占比",
+    "top3_results": [
+      {
+        "rank": 1,
+        "model_architecture": "GPT-4o",
+        "percentage": 37.5,
+        "multimodal_count": 3,
+        "total_count": 8
+      },
+      {
+        "rank": 2,
+        "model_architecture": "CodeT5+",
+        "percentage": 33.33,
+        "multimodal_count": 3,
+        "total_count": 9
+      },
+      {
+        "rank": 3,
+        "model_architecture": "Transformer-XL",
+        "percentage": 20.0,
+        "multimodal_count": 2,
+        "total_count": 10
+      }
+    ]
+  },
+  "question3": {
+    "title": "偏见检测分数中位数排名前3的任务类别",
+    "description": "各任务类别的bias_detection_score中位数",
+    "top3_results": [
+      {
+        "rank": 1,
+        "task_category": "Communication",
+        "median_score": 0.82,
+        "sample_count": 5
+      },
+      {
+        "rank": 2,
+        "task_category": "Research & Summarization",
+        "median_score": 0.79,
+        "sample_count": 4
+      },
+      {
+        "rank": 3,
+        "task_category": "Text Processing",
+        "median_score": 0.78,
+        "sample_count": 12
+      }
+    ]
+  }
+}
