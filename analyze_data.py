@@ -130,7 +130,7 @@ for task_cat in unique_task_categories:
         task_bias_stats.append({
             'task_category': task_cat,
             'sample_count': len(bias_scores),
-            'median_bias_score': round(median_score, 2)
+            'median_bias_score': round(median_score, 4)
         })
 
 # 按偏见检测分数中位数降序排列，取前3名

@@ -1,7 +1,7 @@
 {
   "dataset_info": {
     "total_records": 80,
-    "analysis_date": "2025-10-01 21:18:01",
+    "analysis_date": "2025-10-01 21:50:34",
     "file_name": "first-80-rows-agentic_ai_performance_dataset_20250622.xlsx"
   },
   "question1": {
@@ -65,20 +65,20 @@
       {
         "rank": 1,
         "task_category": "Communication",
-        "median_score": 0.82,
+        "median_score": 0.8214,
         "sample_count": 5
       },
       {
         "rank": 2,
         "task_category": "Research & Summarization",
-        "median_score": 0.79,
+        "median_score": 0.7854,
         "sample_count": 4
       },
       {
         "rank": 3,
-        "task_category": "Text Processing",
-        "median_score": 0.78,
-        "sample_count": 12
+        "task_category": "Decision Making",
+        "median_score": 0.7816,
+        "sample_count": 5
       }
     ]
   }
