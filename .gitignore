@@ -96,3 +96,6 @@ wheels/
 /out-tsc
 /build
 /public/bundles/
+
+# Qoder
+.qoder/
